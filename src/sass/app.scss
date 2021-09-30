@@ -53,6 +53,24 @@
             display: none;
         }
     }
+    &__arrow {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: block;
+        width: 48px;
+        height: 48px;
+        background-image: url(../img/dist/sprite.svg#icon-arrow-down);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+
+        @media screen and (max-width: 575px) {
+            width: 36px;
+            height: 36px;
+        }
+    }
 }
 
 // offer
@@ -152,10 +170,10 @@
 
 // how it works
 .howitworks {
-    margin-top: 75px;
+    padding-top: 75px;
 
     @media screen and (max-width: 767px) {
-        margin-top: 45px;
+        padding-top: 45px;
     }
 
     &__wrapper {
@@ -226,13 +244,13 @@
 
 // about
 .about {
-    margin-top: 100px;
+    padding-top: 100px;
 
     @media screen and (min-width: 768px) and (max-width: 1023px) {
-        margin-top: 80px;
+        padding-top: 80px;
     }
     @media screen and (max-width: 767px) {
-        margin-top: 65px;
+        padding-top: 65px;
     }
 
     &__wrapper {
@@ -290,26 +308,31 @@
 
 // report
 .report {
-    margin-top: 100px;
+    padding-top: 100px;
 
     @media screen and (max-width: 767px) {
-        margin-top: 65px;
+        padding-top: 65px;
     }
     
     &__slider {
         position: relative;
         z-index: 1;
         margin-top: 90px;
+        @media screen and (max-width: 767px) {
+            margin: 0 auto;
+            max-width: 80%;
+            width: 100%;
+        }
         .swiper-slide {
             padding-bottom: 36px; // for box shadow
-            transition: all 0.6s;
+            transition: all 0.4s;
 
             @media screen and (min-width: 768px) {
                 transform: scale(0.7);
             }
-            @media screen and (max-width: 767px) {
-                width: 50%;
-            }
+            //@media screen and (max-width: 767px) {
+            //    width: 50%!important;
+            //}
         }
         .swiper-slide-active {
             transform: scale(1);
@@ -326,23 +349,27 @@
                 display: block;
                 width: 100%;
                 height: calc(100% - 36px);
-                background: linear-gradient(to right, #CABFF2 0%, rgba(80, 47, 203, 0.2) 100%);
+                background: linear-gradient(to right, #CABFF2 0%, rgba(80, 47, 203, 0.36) 100%);
+
+                @media screen and (max-width: 767px) {
+                    display: none;
+                }
             }
-            &::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                z-index: 10;
-                display: block;
-                width: 100%;
-                height: calc(100% - 36px);
-                opacity: 0;
-                background: linear-gradient(to right, #2C2250 0%, rgba(80, 47, 203, 0.36) 100%);
-                transition: opacity 0.4s;
-            }
+            //&::after {
+            //    content: '';
+            //    position: absolute;
+            //    top: 0;
+            //    right: 0;
+            //    bottom: 0;
+            //    left: 0;
+            //    z-index: 10;
+            //    display: block;
+            //    width: 100%;
+            //    height: calc(100% - 36px);
+            //    opacity: var(--opacity);
+            //    background: linear-gradient(to right, #2C2250 0%, rgba(80, 47, 203, 0.36) 100%);
+            //    transition: opacity 0.4s;
+            //}
         }
         .swiper-slide-next {
             position: relative;
@@ -357,23 +384,27 @@
                 display: block;
                 width: 100%;
                 height: calc(100% - 36px);
-                background: linear-gradient(to left, #CABFF2 0%, rgba(80, 47, 203, 0.2) 100%);
+                background: linear-gradient(to left, #CABFF2 0%, rgba(80, 47, 203, 0.36) 100%);
+
+                @media screen and (max-width: 767px) {
+                    display: none;
+                }
             }
-            &::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                z-index: 10;
-                display: block;
-                width: 100%;
-                height: calc(100% - 36px);
-                opacity: 0;
-                background: linear-gradient(to left, #2C2250 0%, rgba(80, 47, 203, 0.36) 100%);
-                transition: opacity 0.4s;
-            }
+            //&::after {
+            //    content: '';
+            //    position: absolute;
+            //    top: 0;
+            //    right: 0;
+            //    bottom: 0;
+            //    left: 0;
+            //    z-index: 10;
+            //    display: block;
+            //    width: 100%;
+            //    height: calc(100% - 36px);
+            //    opacity: var(--opacity);
+            //    background: linear-gradient(to left, #2C2250 0%, rgba(80, 47, 203, 0.36) 100%);
+            //    transition: opacity 0.4s;
+            //}
         }
         .swiper-button-prev,
         .swiper-button-next {
@@ -401,14 +432,28 @@
                 width: 32px;
                 height: 48px;
                 color: $purple-color;
+
+                @media screen and (max-width: 767px) {
+                    margin: 0;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                width: 10%;
+                &:focus,
+                &:hover {
+                    svg {
+                        color: $yellow-color;
+                    }
+                }
             }
         }
         .swiper-button-next {
-            right: 0;
+            right: -10%;
             align-items: flex-end;
         }
         .swiper-button-prev {
-            left: 0;
+            left: -10%;
             align-items: flex-start;
         }
 
@@ -420,8 +465,15 @@
         }
     }
     &__img {
-        box-shadow: 12px 16px 20px rgba(0, 0, 0, 0.2);
+        @media screen and (min-width: 768px) {
+            box-shadow: 12px 16px 20px rgba(0, 0, 0, 0.2);
+        }
     }
+}
+
+// projects
+.projects {
+    padding-top: 80px;
 }
 
 // nav

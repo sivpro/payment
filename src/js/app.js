@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     function smoothScroll(eID) {
         let startY = currentYPosition();
-        let stopY = elmYPosition(eID) - Number(document.querySelector('.header').clientHeight);
+        let stopY = elmYPosition(eID);
         let distance = stopY > startY ? stopY - startY : startY - stopY;
         if (distance < 100) {
             scrollTo(0, stopY); return;
@@ -106,15 +106,14 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // SWIPER
     const reportSlider = document.querySelector('.report__slider .swiper-container')
+    const reportSlideNext = document.querySelector('.report__slider .swiper-button-next')
+    const reportSlidePrev = document.querySelector('.report__slider .swiper-button-prev')
 
     if (reportSlider) {
         const mySwiperReport = new Swiper(reportSlider, {
             spaceBetween: 50,
-            slidesPerView: 2,
-            centeredSlides: true,
-            roundLengths: true,
+            slidesPerView: 1,
             loop: true,
-            loopAdditionalSlides: 30,
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
@@ -125,8 +124,32 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 768: {
                     slidesPerView: 2,
+                    centeredSlides: true,
+                    roundLengths: true,
+                    loopAdditionalSlides: 30,
                 }
             },
         })
     }
+
+    //if (reportSlideNext) {
+    //    reportSlideNext.addEventListener('mouseover', () => {
+    //        document.querySelector('.report__slider .swiper-slide-next').style.setProperty('--opacity', `1`);
+    //    })
+
+    //    reportSlideNext.addEventListener('mouseout', () => {
+    //        document.querySelector('.report__slider .swiper-slide-next').style.setProperty('--opacity', `0`);
+    //    })
+    //}
+
+    //if (reportSlidePrev) {
+    //    reportSlidePrev.addEventListener('mouseover', () => {
+    //        document.querySelector('.report__slider .swiper-slide-prev').style.setProperty('--opacity', `1`);
+    //        document.querySelector('.report__slider .swiper-slide-next').style.setProperty('--opacity', `0`);
+    //    })
+
+    //    reportSlidePrev.addEventListener('mouseout', () => {
+    //        document.querySelector('.report__slider .swiper-slide-prev').style.setProperty('--opacity', `0`);
+    //    })
+    //}
 });

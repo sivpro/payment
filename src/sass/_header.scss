@@ -5,10 +5,19 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        @media screen and (max-width: 767px) {
+            align-items: flex-start;
+        }
     }
     &__group {
         display: flex;
         align-items: center;
+
+        @media screen and (max-width: 767px) {
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
     }
     &__nav {
         .nav__link {
@@ -21,6 +30,15 @@
     &__socials {
         .socials__icon {
             color: $white-color;
+        }
+
+        @media screen and (max-width: 767px) {
+            margin-top: 14px;
+            width: 100%;
+
+            .socials__list {
+                justify-content: flex-end;
+            }
         }
     }
 }
