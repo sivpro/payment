@@ -1,0 +1,145 @@
+// VARIABLES SECTION
+$poppins: 'Poppins', sans-serif; // Poppins
+$primary-font-size: 18px; // Body font-size
+$primary-line-height: 1.35; // Body line-height
+$primary-color: #180C46;
+$black-color: #241F36;
+$white-color: #FFFFFF;
+$light-color: #E5DFF3;
+$yellow-color: #F8C205;
+$purple-color: #502FCB;
+$gray-color: #525455;
+$grey-color: #535050;
+
+// COMMON DOCUMENT STYLES
+body {
+	position: relative;
+	overflow-x: hidden;
+    font-family: $poppins;
+    font-size: $primary-font-size;
+    line-height: $primary-line-height;
+    color: $primary-color;
+}
+
+ul,
+ol,
+li {
+	display: block;
+	padding: 0;
+	margin: 0;
+    list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: bold;
+
+    @media screen and (min-width: 768px) and (max-width: 1023px) {
+        font-size: 36px;
+    }
+    @media screen and (max-width: 767px) {
+        font-size: 30px;
+    }
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    display: inline-block;
+    color: inherit;
+    transition: all 0.4s;
+    &:hover {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+img {
+    max-width: 100%;
+}
+
+svg {
+    transition: all 0.4s;
+}
+
+// COMMON FOR PAGE ˆ
+.scroll-disabled {
+    overflow: hidden;
+}
+
+.container {
+	padding: 0 20px;
+	margin: 0 auto;
+    max-width: 1280px;
+}
+
+.content {
+    font-size: 18px;
+    color: $grey-color;
+
+    @media screen and (max-width: 1023px) {
+        font-size: 16px;
+    }
+
+    & > * {
+        margin-bottom: 2em;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    h1, h2, h3, h4, h5, h6 {
+        &:not(:first-child) {
+            margin-top: 1em;
+        }
+        margin-bottom: 2em;
+    }
+    h1 {
+        font-size: 2.5em;
+    }
+    h2 {
+        font-size: 2em;
+    }
+    h3, h4, h5, h6 {
+        font-size: 1em;
+    }
+}
+
+.section-heading {
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+    color: $black-color;
+
+    @media screen and (max-width: 575px) {
+        font-size: 24px;
+    }
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px;
+    min-width: 298px;
+    width: fit-content;
+    font-size: 22px;
+    font-weight: normal;
+    text-align: center;
+    color: $primary-color;
+    background: $yellow-color;
+    border: 0;
+    border-radius: 20px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+    &:hover,
+    &:focus {
+        color: $white-color;
+    }
+
+    @media screen and (max-width: 575px) {
+        font-size: 20px;
+    }
+}

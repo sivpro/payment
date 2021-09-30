@@ -1,0 +1,26 @@
+.header {
+    padding: 26px 0;
+    width: 100%;
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__group {
+        display: flex;
+        align-items: center;
+    }
+    &__nav {
+        .nav__link {
+            color: $white-color;
+        }
+    }
+    &__nav + &__socials {
+        margin-left: 74px;
+    }
+    &__socials {
+        .socials__icon {
+            color: $white-color;
+        }
+    }
+}
