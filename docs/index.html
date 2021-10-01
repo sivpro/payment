@@ -179,6 +179,163 @@
     <section class="projects" id="projects">
         <div class="container">
             <h2 class="section-heading">Выбор проектов для сравнения</h2>
+            <div class="projects__wrapper">
+                <h3 class="projects__title">Что нужно</h3>
+                <div class="projects__inner">
+                    <div class="input-group projects__input-group">
+                        <input type="text" class="input-group__input" placeholder="Регион">
+                    </div>
+                    <div class="projects__list">
+                        <label for="status-checkbox-01" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="status-checkbox-01">
+                            <span class="btn-checkbox__label">Под Аренду</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="status-checkbox-02" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="status-checkbox-02">
+                            <span class="btn-checkbox__label">Проживание</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="status-checkbox-03" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="status-checkbox-03">
+                            <span class="btn-checkbox__label">Под продажу</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="projects__inner">
+                    <div class="input-group projects__input-group">
+                        <input type="text" class="input-group__input" placeholder="Район любой">
+                    </div>
+                    <div class="projects__list">
+                        <label for="area-checkbox-01" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="area-checkbox-01">
+                            <span class="btn-checkbox__label">Тверской</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="area-checkbox-02" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="area-checkbox-02">
+                            <span class="btn-checkbox__label">Арбатский</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="projects__inner">
+                    <div class="input-group projects__input-group">
+                        <input type="number" class="input-group__input" placeholder="Бюджет от">
+                        <span class="input-group__help">р.</span>
+                    </div>
+                    <div class="projects__list">
+                        <label for="price-checkbox-01" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="price-checkbox-01">
+                            <span class="btn-checkbox__label">Комфорт</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="price-checkbox-02" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="price-checkbox-02">
+                            <span class="btn-checkbox__label">Бизнес</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="price-checkbox-03" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="price-checkbox-03">
+                            <span class="btn-checkbox__label">Премиум</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="price-checkbox-04" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="price-checkbox-04">
+                            <span class="btn-checkbox__label">Элитный</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="projects__inner">
+                    <div class="input-group projects__input-group">
+                        <input type="number" class="input-group__input" placeholder="Площадь от">
+                        <span class="input-group__help">м<sup>2</sup></span>
+                    </div>
+                    <div class="projects__list">
+                        <label for="type-checkbox-01" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="type-checkbox-01">
+                            <span class="btn-checkbox__label">Студия</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="type-checkbox-02" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="type-checkbox-02">
+                            <span class="btn-checkbox__label">1-комн. и 2Е</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="type-checkbox-03" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="type-checkbox-03">
+                            <span class="btn-checkbox__label">2-комн. и 3Е</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="type-checkbox-04" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="type-checkbox-04">
+                            <span class="btn-checkbox__label">3-комн. и 4Е</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="type-checkbox-05" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="type-checkbox-05">
+                            <span class="btn-checkbox__label">4 комн.+</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="projects__wrapper">
+                <div class="projects__inner">
+                    <h3 class="projects__title">Тоже важно</h3>
+                    <div class="projects__list">
+                        <label for="required-checkbox-01" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="required-checkbox-01">
+                            <span class="btn-checkbox__label">Метро</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="required-checkbox-02" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="required-checkbox-02">
+                            <span class="btn-checkbox__label">Отделка</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="required-checkbox-03" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="required-checkbox-03">
+                            <span class="btn-checkbox__label">Парковка</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="projects__wrapper">
+                <h3 class="projects__title">Возраст и число проживающих</h3>
+                <div class="projects__column">
+                    <div class="quantity projects__quantity">
+                        <div class="quantity__group">
+                            <button class="quantity__minus">-</button>
+                            <input type="number" value="1" class="quantity__number" min="1" inputmode="numeric">
+                            <button class="quantity__plus">+</button>
+                        </div>
+                        <span class="quantity__help">до 5 лет</span>
+                    </div>
+                </div>
+            </div>-->
+            <div class="projects__wrapper">
+                <div class="projects__inner">
+                    <h3 class="projects__title">Ещё есть</h3>
+                    <div class="projects__list">
+                        <label for="pets-checkbox-01" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="pets-checkbox-01">
+                            <span class="btn-checkbox__label">Собака</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="projects__wrapper">
+                <h3 class="projects__title">Сравнить проекты</h3>
+            </div>
+            <div class="projects__total">
+                <span class="projects__text">Подходит проектов 73</span>
+                <a href="#" class="projects__btn btn">Выбрать проекты</a>
+            </div>
         </div>
     </section>
     <!-- End of projects -->
@@ -194,7 +351,7 @@
                         <a href="#" class="nav__link">Тарифы</a>
                     </li>
                     <li class="nav__item">
-                        <a href="#" class="nav__link">Как это работает</a>
+                        <a href="#howitworks" class="nav__link">Как это работает</a>
                     </li>
                     <li class="nav__item">
                         <a href="#" class="nav__link">Пользовательское соглашение</a>
@@ -214,16 +371,23 @@
                         </a>
                     </li>
                     <li class="socials__item">
-                        <a href="#" class="socials__link" aria-label="Instagram">
+                        <a href="#" class="socials__link" aria-label="YouTube">
                             <svg class="socials__icon">
-                                <use xlink:href="img/dist/sprite.svg#icon-instagram"></use>
+                                <use xlink:href="img/dist/sprite.svg#icon-youtube"></use>
                             </svg>
                         </a>
                     </li>
                     <li class="socials__item">
-                        <a href="#" class="socials__link" aria-label="ВКонтакте">
+                        <a href="#" class="socials__link" aria-label="Facebook">
                             <svg class="socials__icon">
-                                <use xlink:href="img/dist/sprite.svg#icon-vk"></use>
+                                <use xlink:href="img/dist/sprite.svg#icon-facebook"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="socials__item">
+                        <a href="#" class="socials__link" aria-label="Instagram">
+                            <svg class="socials__icon">
+                                <use xlink:href="img/dist/sprite.svg#icon-instagram"></use>
                             </svg>
                         </a>
                     </li>

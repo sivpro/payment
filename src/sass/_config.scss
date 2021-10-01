@@ -6,8 +6,11 @@ $primary-color: #180C46;
 $black-color: #241F36;
 $white-color: #FFFFFF;
 $light-color: #E5DFF3;
+$champagne-color: #EFE9FF;
 $yellow-color: #F8C205;
 $purple-color: #502FCB;
+$light-purple-color: #7F5FDC;
+$pink-color: #D8D3E7;
 $gray-color: #525455;
 $grey-color: #535050;
 
@@ -141,5 +144,183 @@ svg {
 
     @media screen and (max-width: 575px) {
         font-size: 20px;
+    }
+}
+
+.btn-checkbox {
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    cursor: pointer;
+    &__input {
+        display: none;
+        &:checked ~ .btn-checkbox__label {
+            color: $champagne-color;
+            background: $light-purple-color;
+        }
+    }
+    &__icon {
+        position: relative;
+        display: none;
+        min-width: 20px;
+        min-height: 20px;
+        max-width: 20px;
+        max-height: 20px;
+        background-color: transparent;
+        background-repeat: no-repeat;
+        background-size: 19px;
+        background-position: center center;
+        border-radius: 3px;
+        transition: all 0.25s;
+    }
+    &__label {
+        display: block;
+        padding: 10.5px 40px;
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+        white-space: nowrap;
+        color: $gray-color;
+        background: $pink-color;
+        border-radius: 10px;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+        transition: all 0.25s;
+        user-select: none;
+    }
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    &__input {
+        display: block;
+        appearance: none;
+        padding: 10px 20px;
+        font-size: 18px;
+        font-weight: normal;
+        color: $primary-color;
+        background: $white-color;
+        border: 0;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        &::placeholder {
+            color: rgba($gray-color, 0.7);
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+    &__input[type=number] {
+        -moz-appearance: textfield;
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            display: none;
+            appearance: none;
+            margin: 0;
+        }
+    }
+    &__help {
+        display: block;
+        margin-left: 10px;
+        font-size: 18px;
+        font-weight: normal;
+        color: $gray-color;
+        opacity: 0.7;
+    }
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: fit-content;
+    &__group {
+        position: relative;
+        display: flex;
+        align-items: center;
+        max-width: 102px;
+        width: 100%;
+        background: $white-color;
+        border-radius: 20px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    &__number {
+        padding: 12px 8px;
+        max-width: 20px;
+        font-size: 18px;
+        font-weight: normal;
+        text-align: center;
+        background: transparent;
+        border: none;
+        -moz-appearance: textfield;
+        &:focus {
+            outline: none;
+        }
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+    &__minus,
+    &__plus {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        width: 40px;
+        height: 100%;
+        font-size: 0;
+        text-align: center;
+        background: transparent;
+        border: 0;
+        transition: background 0.4s;
+        &:hover,
+        &:focus {
+            background: $grey-color;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+    &__minus {
+        &::before {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 1px;
+            text-align: center;
+            background: $primary-color;
+        }
+    }
+
+    &__plus {
+        &::before {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 1px;
+            text-align: center;
+            background: $primary-color;
+        }
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: block;
+            width: 1px;
+            height: 10px;
+            background: $primary-color;
+        }
+    }
+    &__help {
+        display: block;
+        margin-left: 24px;
+        font-size: 18px;
+        font-weight: normal;
+        color: $gray-color;
     }
 }

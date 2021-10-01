@@ -132,24 +132,24 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
 
-    //if (reportSlideNext) {
-    //    reportSlideNext.addEventListener('mouseover', () => {
-    //        document.querySelector('.report__slider .swiper-slide-next').style.setProperty('--opacity', `1`);
-    //    })
-
-    //    reportSlideNext.addEventListener('mouseout', () => {
-    //        document.querySelector('.report__slider .swiper-slide-next').style.setProperty('--opacity', `0`);
-    //    })
-    //}
-
-    //if (reportSlidePrev) {
-    //    reportSlidePrev.addEventListener('mouseover', () => {
-    //        document.querySelector('.report__slider .swiper-slide-prev').style.setProperty('--opacity', `1`);
-    //        document.querySelector('.report__slider .swiper-slide-next').style.setProperty('--opacity', `0`);
-    //    })
-
-    //    reportSlidePrev.addEventListener('mouseout', () => {
-    //        document.querySelector('.report__slider .swiper-slide-prev').style.setProperty('--opacity', `0`);
-    //    })
-    //}
+    // QUANTITY
+    const quantity = document.querySelectorAll('.quantity'),
+        quantityMinus = document.getElementsByClassName('quantity__minus'),
+        quantityPlus = document.getElementsByClassName('quantity__plus')
+    
+    let quantityCountInput = document.getElementsByClassName('quantity__number')
+    
+    if (quantity) {
+        quantity.forEach((s, i) => {
+            quantityMinus[i].addEventListener('click', () => {
+                if ((quantityCountInput[i].value) * 1 >= 1) {
+                    quantityCountInput[i].value = (quantityCountInput[i].value) * 1 - 1;
+                }
+            });
+    
+            quantityPlus[i].addEventListener('click', () => {
+                quantityCountInput[i].value = (quantityCountInput[i].value) * 1 + 1;
+            })
+        })
+    }
 });

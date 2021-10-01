@@ -66,9 +66,8 @@
         background-size: cover;
         background-position: center center;
 
-        @media screen and (max-width: 575px) {
-            width: 36px;
-            height: 36px;
+        @media screen and (max-width: 767px) {
+            display: none;
         }
     }
 }
@@ -324,15 +323,12 @@
             width: 100%;
         }
         .swiper-slide {
-            padding-bottom: 36px; // for box shadow
             transition: all 0.4s;
 
             @media screen and (min-width: 768px) {
+                padding-bottom: 36px; // for box shadow
                 transform: scale(0.7);
             }
-            //@media screen and (max-width: 767px) {
-            //    width: 50%!important;
-            //}
         }
         .swiper-slide-active {
             transform: scale(1);
@@ -355,21 +351,6 @@
                     display: none;
                 }
             }
-            //&::after {
-            //    content: '';
-            //    position: absolute;
-            //    top: 0;
-            //    right: 0;
-            //    bottom: 0;
-            //    left: 0;
-            //    z-index: 10;
-            //    display: block;
-            //    width: 100%;
-            //    height: calc(100% - 36px);
-            //    opacity: var(--opacity);
-            //    background: linear-gradient(to right, #2C2250 0%, rgba(80, 47, 203, 0.36) 100%);
-            //    transition: opacity 0.4s;
-            //}
         }
         .swiper-slide-next {
             position: relative;
@@ -390,21 +371,6 @@
                     display: none;
                 }
             }
-            //&::after {
-            //    content: '';
-            //    position: absolute;
-            //    top: 0;
-            //    right: 0;
-            //    bottom: 0;
-            //    left: 0;
-            //    z-index: 10;
-            //    display: block;
-            //    width: 100%;
-            //    height: calc(100% - 36px);
-            //    opacity: var(--opacity);
-            //    background: linear-gradient(to left, #2C2250 0%, rgba(80, 47, 203, 0.36) 100%);
-            //    transition: opacity 0.4s;
-            //}
         }
         .swiper-button-prev,
         .swiper-button-next {
@@ -449,12 +415,20 @@
             }
         }
         .swiper-button-next {
-            right: -10%;
+            right: 0;
             align-items: flex-end;
+
+            @media screen and (max-width: 767px) {
+                right: -10%;
+            }
         }
         .swiper-button-prev {
-            left: -10%;
+            left: 0;
             align-items: flex-start;
+
+            @media screen and (max-width: 767px) {
+                left: -10%;
+            }
         }
 
         @media screen and (min-width: 768px) and (max-width: 1023px) {
@@ -474,6 +448,88 @@
 // projects
 .projects {
     padding-top: 80px;
+
+    @media screen and (max-width: 767px) {
+        padding-top: 60px;
+    }
+    
+    &__wrapper {
+        margin-top: 60px;
+        @media screen and (max-width: 767px) {
+            margin-top: 40px;
+        }
+    }
+    &__title {
+        font-size: 22px;
+        font-weight: normal;
+        white-space: nowrap;
+
+        @media screen and (max-width: 767px) {
+            font-size: 20px;
+        }
+    }
+    &__title + &__inner {
+        margin-top: 32px;
+    }
+    &__inner {
+        @media screen and (min-width: 768px) {
+            display: flex;
+            align-items: center;
+        }
+    }
+    &__inner + &__inner {
+        margin-top: 32px;
+    }
+    &__list {
+        display: flex;
+        align-items: center;
+        padding: 8px 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        &::-webkit-scrollbar {
+            -webkit-appearance: none;
+            width: 0;
+            height: 0;
+        }
+
+        @media screen and (min-width: 768px) {
+            margin-left: 32px;
+        }
+        @media screen and (max-width: 767px) {
+            margin-top: 12px;
+        }
+    }
+    &__input-group {
+        @media screen and (min-width: 768px) {
+            .input-group__input {
+                max-width: 172px;
+            }
+        }
+        @media screen and (max-width: 767px) {
+            .input-group__input {
+                width: 100%;
+            }
+        }
+    }
+    &__input-group + &__checkbox {
+        margin-left: 26px;
+    }
+    &__checkbox + &__checkbox {
+        margin-left: 20px;
+    }
+    &__total {
+        margin-top: 100px;
+        text-align: center;
+        .projects__btn {
+            margin-top: 32px;
+        }
+    }
+    &__text {
+        display: block;
+        font-size: 18px;
+        font-weight: normal;
+        color: $gray-color;
+    }
 }
 
 // nav
