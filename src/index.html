@@ -184,6 +184,17 @@
                 <div class="projects__inner">
                     <div class="input-group projects__input-group">
                         <input type="text" class="input-group__input" placeholder="Регион">
+                        <ul class="input-dropdown">
+                            <li class="input-dropdown__item">
+                                <a href="#" class="input-dropdown__link">Москва</a>
+                            </li>
+                            <li class="input-dropdown__item">
+                                <a href="#" class="input-dropdown__link">Волгоград</a>
+                            </li>
+                            <li class="input-dropdown__item">
+                                <a href="#" class="input-dropdown__link">Санкт-Петербург</a>
+                            </li>
+                        </ul>
                     </div>
                     <div class="projects__list">
                         <label for="status-checkbox-01" class="btn-checkbox projects__checkbox">
@@ -206,6 +217,29 @@
                 <div class="projects__inner">
                     <div class="input-group projects__input-group">
                         <input type="text" class="input-group__input" placeholder="Район любой">
+                        <ul class="input-dropdown">
+                            <li class="input-dropdown__item">
+                                <a href="#" class="input-dropdown__link">Тверской</a>
+                            </li>
+                            <li class="input-dropdown__item">
+                                <a href="#" class="input-dropdown__link">Арбатский</a>
+                            </li>
+                            <li class="input-dropdown__item">
+                                <a href="#" class="input-dropdown__link">Васильковский</a>
+                            </li>
+                            <li class="input-dropdown__item">
+                                <a href="#" class="input-dropdown__link">Сумской</a>
+                            </li>
+                            <li class="input-dropdown__item">
+                                <a href="#" class="input-dropdown__link">Тверской</a>
+                            </li>
+                            <li class="input-dropdown__item">
+                                <a href="#" class="input-dropdown__link">Васильковский</a>
+                            </li>
+                            <li class="input-dropdown__item">
+                                <a href="#" class="input-dropdown__link">Арбатский</a>
+                            </li>
+                        </ul>
                     </div>
                     <!--<div class="projects__list">
                         <label for="area-checkbox-01" class="btn-checkbox projects__checkbox">
@@ -404,7 +438,7 @@
             </div>
             <div class="projects__total">
                 <span class="projects__text">Подходит проектов 73</span>
-                <a href="#" class="projects__btn btn">Выбрать проекты</a>
+                <a href="#" class="projects__btn btn modal-btn" data-id="order">Выбрать проекты</a>
             </div>
         </div>
     </section>
@@ -466,6 +500,116 @@
         </div>
     </footer>
     <!-- End of footer -->
+    <!-- Modal -->
+    <div class="modal" id="order">
+        <button class="modal__close" aria-label="Закрыть">
+            <svg class="modal__close--icon">
+                <use xlink:href="img/dist/sprite.svg#icon-close"></use>
+            </svg>
+        </button>
+        <form action="#" class="modal__content">
+            <div class="modal__block">
+                <h3 class="modal__title">Контакты для визитки в отчёте</h3>
+                <div class="modal__inner">
+                    <div class="input-group modal__input-group">
+                        <input type="tel" class="input-group__input" placeholder="+7 (000) 000-00-00" data-inputmask="'mask': '+7 (999) 999 99 99'" inputmode="tel" required>
+                    </div>
+                    <div class="input-group modal__input-group">
+                        <input type="text" class="input-group__input" placeholder="Имя Фамилия" required>
+                    </div>
+                </div>
+            </div>
+            <div class="modal__block">
+                <h3 class="modal__title">Куда выслать отчёт</h3>
+                <div class="modal__inner">
+                    <div class="input-group modal__input-group">
+                        <input type="email" class="input-group__input" placeholder="E-mail" required>
+                    </div>
+                    <div class="input-group modal__input-group">
+                        <input type="tel" class="input-group__input" placeholder="+7 (000) 000-00-00" data-inputmask="'mask': '+7 (999) 999 99 99'" inputmode="tel" required>
+                    </div>
+                    <div class="modal__group">
+                        <label for="icon-checkbox-01" class="icon-checkbox modal__checkbox">
+                            <input type="radio" name="socials" class="icon-checkbox__input" id="icon-checkbox-01" required>
+                            <svg class="icon-checkbox__icon">
+                                <use xlink:href="img/dist/sprite.svg#icon-telegram"></use>
+                            </svg>
+                        </label>
+                        <label for="icon-checkbox-02" class="icon-checkbox modal__checkbox">
+                            <input type="radio" name="socials" class="icon-checkbox__input" id="icon-checkbox-02" required>
+                            <svg class="icon-checkbox__icon">
+                                <use xlink:href="img/dist/sprite.svg#icon-whatsapp"></use>
+                            </svg>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal__block">
+                <h3 class="modal__title">Выбери подходящий тариф</h3>
+                <div class="modal__column">
+                    <label for="tarif-checkbox-01" class="btn-checkbox modal__checkbox">
+                        <input type="radio" name="tarif" class="btn-checkbox__input" id="tarif-checkbox-01" required>
+                        <span class="btn-checkbox__label">Разовый (1 отчёт) - <b>999</b> р.</span>
+                        <span class="btn-checkbox__icon"></span>
+                    </label>
+                    <label for="tarif-checkbox-02" class="btn-checkbox modal__checkbox">
+                        <input type="radio" name="tarif" class="btn-checkbox__input" id="tarif-checkbox-02" required>
+                        <span class="btn-checkbox__label">Подписка (8 отчётов) - <b>4 999</b> р.</span>
+                        <span class="btn-checkbox__icon"></span>
+                    </label>
+                    <label for="tarif-checkbox-03" class="btn-checkbox modal__checkbox">
+                        <input type="radio" name="tarif" class="btn-checkbox__input" id="tarif-checkbox-03" required>
+                        <span class="btn-checkbox__label">Уже есть подписка</span>
+                        <span class="btn-checkbox__icon"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal__bottom">
+                <span class="modal__help">Доступно отчётов: 6</span>
+                <button class="modal__btn btn">Получить отчёт</button>
+
+                <!-- If error -->
+                <!--<p class="modal__help">
+                    Ой... не можем найти Вашу подписку<br>
+                    Проверьте указанные телефоны или напишите нам
+                </p>
+                <div class="socials modal__socials">
+                    <ul class="socials__list">
+                        <li class="socials__item">
+                            <a href="#" class="socials__link" aria-label="Telegram">
+                                <svg class="socials__icon">
+                                    <use xlink:href="img/dist/sprite.svg#icon-telegram"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="socials__item">
+                            <a href="#" class="socials__link" aria-label="WhatsApp">
+                                <svg class="socials__icon">
+                                    <use xlink:href="img/dist/sprite.svg#icon-whatsapp"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="socials__item">
+                            <a href="#" class="socials__link" aria-label="Facebook">
+                                <svg class="socials__icon">
+                                    <use xlink:href="img/dist/sprite.svg#icon-facebook"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="socials__item">
+                            <a href="#" class="socials__link" aria-label="Instagram">
+                                <svg class="socials__icon">
+                                    <use xlink:href="img/dist/sprite.svg#icon-instagram"></use>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>-->
+            </div>
+        </form>
+    </div>
+    <div class="overlay"></div>
+    <!-- End of modal -->
     <!-- Scripts -->
     <script src="js/vendor.min.js"></script>
     <script src="js/app.min.js"></script>

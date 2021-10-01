@@ -152,4 +152,92 @@ document.addEventListener('DOMContentLoaded', function () {
             })
         })
     }
+
+    // INPUT && DROPDOWN LIST
+    const inputGroup = document.querySelectorAll('.input-group__input')
+    const inputDropdown = document.querySelectorAll('.input-dropdown')
+
+    if (inputGroup) {
+        inputGroup.forEach((item) => {
+            item.addEventListener('input', () => {
+                if (item.value.length > 0 && item.nextElementSibling) {
+                    if (item.nextElementSibling.classList.contains('input-dropdown')) {
+                        item.nextElementSibling.classList.add('input-dropdown--active')
+                    }
+                } else if (item.value.length < 1 && item.nextElementSibling) {
+                    if (item.nextElementSibling.classList.contains('input-dropdown--active')) {
+                        item.nextElementSibling.classList.remove('input-dropdown--active')
+                    }
+                }
+            })
+        })
+    }
+
+    // MODAL
+    const modalBtn = document.querySelectorAll('.modal-btn')
+    const modal = document.querySelectorAll('.modal')
+    const modalClose = document.querySelectorAll('.modal__close')
+    const overlay = document.querySelector('.overlay')
+    
+    if (modalBtn) {
+        modalBtn.forEach((item) => {
+            item.addEventListener('click', (event) => {
+                event.preventDefault();
+
+                const modalID = item.dataset.id
+
+                if (modalID) {
+                    if (!overlay.classList.contains('overlay--active')) {
+                        overlay.classList.add('overlay--active')
+                    }
+    
+                    document.querySelectorAll('.modal.modal--active').forEach((child) => child.classList.remove('modal--active'))
+                    document.body.classList.add('scroll-disabled')
+                    document.getElementById(modalID).classList.add('modal--active')
+
+                    if (document.getElementById(modalID).classList.contains('modal--sm')) {
+                        setTimeout(() => {
+                            document.body.classList.remove('scroll-disabled')
+                            document.querySelectorAll('.modal.modal--active').forEach((child) => child.classList.remove('modal--active'))
+                            overlay.classList.remove('overlay--active')
+                        }, 5000)
+                    }
+                }
+            });
+        });
+    }
+
+    document.body.addEventListener('keyup', (event) => {
+        let key = event.keyCode;
+
+        if (key == 27) {
+            if (overlay.classList.contains('overlay--active')) {
+                document.body.classList.remove('scroll-disabled')
+                document.querySelectorAll('.modal.modal--active').forEach((child) => child.classList.remove('modal--active'))
+                overlay.classList.remove('overlay--active')
+            }
+        };
+    }, false);
+
+    if (modalClose) {
+        modalClose.forEach((item) => {
+            item.addEventListener('click', () => {
+                if (overlay.classList.contains('overlay--active')) {
+                    document.body.classList.remove('scroll-disabled')
+                    document.querySelectorAll('.modal.modal--active').forEach((child) => child.classList.remove('modal--active'))
+                    overlay.classList.remove('overlay--active')
+                }
+            });
+        });
+    }
+
+    if (overlay) {
+        overlay.addEventListener('click', () => {
+            if (overlay.classList.contains('overlay--active')) {
+                document.body.classList.remove('scroll-disabled')
+                document.querySelectorAll('.modal.modal--active').forEach((child) => child.classList.remove('modal--active'))
+                overlay.classList.remove('overlay--active')
+            }
+        });
+    }
 });
