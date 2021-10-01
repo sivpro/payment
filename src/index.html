@@ -436,6 +436,7 @@
                     </label>
                 </div>-->
             </div>
+            <div class="projects__map projects__map--active" id="YMapsID"></div> <!-- Чтобы свернуть карту - нужно убрать класс projects__map--active -->
             <div class="projects__total">
                 <span class="projects__text">Подходит проектов 73</span>
                 <a href="#" class="projects__btn btn modal-btn" data-id="order">Выбрать проекты</a>
@@ -613,5 +614,22 @@
     <!-- Scripts -->
     <script src="js/vendor.min.js"></script>
     <script src="js/app.min.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=6bbdf00b-d01b-420e-8ea2-2ca9c741ee6c&lang=ru_RU" type="text/javascript"></script>
+    <script type="text/javascript">
+        ymaps.ready(function () {
+            var myMap = new ymaps.Map("YMapsID", {
+                center: [55.76, 37.64],
+                zoom: 10
+            });
+
+            // Создание геообъекта с типом точка (метка).
+            var myPlacemark = new ymaps.Placemark([55.8, 37.8], {}, {
+                iconLayout: 'default#image',
+                iconImageHref: '/maps/d../../jsapi/doc/2.1/examples/images/myIcon.gif',
+                iconImageSize: [30, 42],
+                iconImageOffset: [-3, -42]
+            });
+        });
+    </script>
 </body>
 </html>
