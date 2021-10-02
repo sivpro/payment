@@ -137,6 +137,9 @@
             margin-top: 20px;
         }
     }
+    &__btn + &__checkbox {
+        margin-top: 20px;
+    }
     &__socials {
         margin-top: 30px;
         .socials {

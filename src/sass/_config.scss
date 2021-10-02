@@ -218,6 +218,13 @@ svg {
     }
 }
 
+.square-checkbox {
+    margin: 0;
+    &__label {
+        margin-left: 5px;
+    }
+}
+
 .input-group {
     position: relative;
     display: flex;
