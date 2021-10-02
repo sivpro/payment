@@ -170,6 +170,20 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 }
             })
+            item.addEventListener('focus', () => {
+                if (item.value.length > 0 && item.nextElementSibling) {
+                    if (item.nextElementSibling.classList.contains('input-dropdown')) {
+                        item.nextElementSibling.classList.add('input-dropdown--active')
+                    }
+                }
+            })
+            item.addEventListener('blur', () => {
+                if (item.value.length > 0 && item.nextElementSibling) {
+                    if (item.nextElementSibling.classList.contains('input-dropdown--active')) {
+                        item.nextElementSibling.classList.remove('input-dropdown--active')
+                    }
+                }
+            })
         })
     }
 
