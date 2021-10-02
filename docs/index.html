@@ -22,7 +22,7 @@
                         <nav class="nav header__nav">
                             <ul class="nav__list">
                                 <li class="nav__item">
-                                    <a href="#" class="nav__link">Тарифы</a>
+                                    <a href="tarifs.html" class="nav__link">Тарифы</a>
                                 </li>
                             </ul>
                         </nav>
@@ -404,15 +404,15 @@
                 </div>
             </div>
             <div class="projects__wrapper">
-                <h3 class="projects__title">Сравнить проекты</h3>
-                <div class="projects__inner projects__inner--column">
-                    <div class="tooltip projects__group">
-                        <a href="#" class="projects__btn btn btn--purple btn--sm">Рекомендуем по рейтингу</a>
-                        <span class="tooltip__icon" aria-label="Подсказка">?</span>
-                        <div class="tooltip__wrapper">
-                            <p>Об исключительной важности электрического света для армии. Об азбучных истинах караульной службе и о злоумышленниках в овечьих шкурах.</p>
-                        </div>
+                <div class="tooltip projects__tooltip">
+                    <h3 class="projects__title">Сравнить проекты</h3>
+                    <span class="tooltip__icon" aria-label="Подсказка">?</span>
+                    <div class="tooltip__wrapper">
+                        <p>Об исключительной важности электрического света для армии. Об азбучных истинах караульной службе и о злоумышленниках в овечьих шкурах.</p>
                     </div>
+                </div>
+                <div class="projects__inner projects__inner--column">
+                    <a href="#" class="projects__btn btn btn--purple btn--sm">Рекомендуем по рейтингу</a>
                     <div class="input-group projects__input">
                         <input type="number" class="input-group__input" placeholder="Выбрать не более 3 вариантов">
                     </div>
@@ -437,6 +437,110 @@
                 </div>-->
             </div>
             <div class="projects__map projects__map--active" id="YMapsID"></div> <!-- Чтобы свернуть карту - нужно убрать класс projects__map--active -->
+            <div class="projects__wrapper">
+                <div class="tooltip projects__tooltip">
+                    <h3 class="projects__title">Что сравниваем</h3>
+                    <span class="tooltip__icon" aria-label="Подсказка">?</span>
+                    <div class="tooltip__wrapper">
+                        <p>Об исключительной важности электрического света для армии. Об азбучных истинах караульной службе и о злоумышленниках в овечьих шкурах.</p>
+                    </div>
+                </div>
+                <div class="projects__inner">
+                    <div class="projects__list projects__list--wrap">
+                        <h3 class="projects__title">Исключи ненужное</h3>
+                        <label for="variants-checkbox-01" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-01" checked>
+                            <span class="btn-checkbox__label">Образование и медицина вокруг</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="variants-checkbox-02" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-02" checked>
+                            <span class="btn-checkbox__label">Благоустройство ЖК</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="variants-checkbox-03" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-03" checked>
+                            <span class="btn-checkbox__label">Парки и набережные</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="variants-checkbox-04" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-04" checked>
+                            <span class="btn-checkbox__label">Негативное соседство</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="variants-checkbox-05" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-05" checked>
+                            <span class="btn-checkbox__label">Инфраструктура ЖК</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="variants-checkbox-06" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-06" checked>
+                            <span class="btn-checkbox__label">Безопасность в ЖК</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="variants-checkbox-07" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-07" checked>
+                            <span class="btn-checkbox__label">Материалы строительства</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="variants-checkbox-08" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-08" checked>
+                            <span class="btn-checkbox__label">Характеристика квартир</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="variants-checkbox-09" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-09" checked>
+                            <span class="btn-checkbox__label">Характеристика домов</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="variants-checkbox-10" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-10" checked>
+                            <span class="btn-checkbox__label">Инженерия</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="variants-checkbox-11" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-11" checked>
+                            <span class="btn-checkbox__label">Метро и электрички</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="variants-checkbox-12" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-12" checked>
+                            <span class="btn-checkbox__label">Для собак</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="variants-checkbox-13" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-13" checked>
+                            <span class="btn-checkbox__label">МОП</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="variants-checkbox-14" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-14" checked>
+                            <span class="btn-checkbox__label">Торговля</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="projects__inner">
+                    <div class="projects__list projects__list--wrap">
+                        <h3 class="projects__title">Добавь нужное</h3>
+                        <label for="variants-add-checkbox-01" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-add-checkbox-01">
+                            <span class="btn-checkbox__label">Отделка</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="variants-add-checkbox-02" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-add-checkbox-02">
+                            <span class="btn-checkbox__label">Парковка</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                        <label for="variants-add-checkbox-03" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-add-checkbox-03">
+                            <span class="btn-checkbox__label">Условия</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
             <div class="projects__total">
                 <span class="projects__text">Подходит проектов 73</span>
                 <a href="#" class="projects__btn btn modal-btn" data-id="order">Выбрать проекты</a>
@@ -453,7 +557,7 @@
             <nav class="nav footer__nav">
                 <ul class="nav__list">
                     <li class="nav__item">
-                        <a href="#" class="nav__link">Тарифы</a>
+                        <a href="tarifs.html" class="nav__link">Тарифы</a>
                     </li>
                     <li class="nav__item">
                         <a href="#howitworks" class="nav__link">Как это работает</a>
@@ -617,18 +721,59 @@
     <script src="https://api-maps.yandex.ru/2.1/?apikey=6bbdf00b-d01b-420e-8ea2-2ca9c741ee6c&lang=ru_RU" type="text/javascript"></script>
     <script type="text/javascript">
         ymaps.ready(function () {
-            var myMap = new ymaps.Map("YMapsID", {
-                center: [55.76, 37.64],
-                zoom: 10
+            var myMap = new ymaps.Map('YMapsID', {
+                center: [55.751574, 37.573856],
+                zoom: 9
+            }),
+
+            // Создаём макет содержимого.
+            MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
+                `<div style="color: #FFFFFF; font-weight: bold;">
+                    $[properties.iconContent]
+                    Magnolia Park
+                    Ромашка Девелопмент 3Q 2023 г. 
+
+                    квартиры премиум класс
+                    Студии от 5 890 000 р.
+                    1-комн. от 7 236 000 р.
+                </div>`
+            ),
+
+            myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
+                hintContent: 'Magnolia Park',
+                balloonContent: 'Это красивая метка',
+                iconContent: '1232'
+            }, {
+                // Опции.
+                iconLayout: 'default#image',
+                iconImageHref: 'img/dist/icon-mark.svg',
+                iconImageSize: [49, 72],
+                //iconImageOffset: [-24, -24],
+                // Смещение слоя с содержимым относительно слоя с картинкой.
+                iconContentOffset: [15, 15],
+                // Макет содержимого.
+                iconContentLayout: MyIconContentLayout
+            }),
+
+            myPlacemarkWithContent = new ymaps.Placemark([55.661574, 37.573856], {
+                hintContent: 'Magnolia Park',
+                balloonContent: 'А эта — новогодняя',
+                iconContent: '12'
+            }, {
+                // Опции.
+                iconLayout: 'default#image',
+                iconImageHref: 'img/dist/icon-mark.svg',
+                iconImageSize: [49, 72],
+                //iconImageOffset: [-24, -24],
+                // Смещение слоя с содержимым относительно слоя с картинкой.
+                iconContentOffset: [15, 15],
+                // Макет содержимого.
+                iconContentLayout: MyIconContentLayout
             });
 
-            // Создание геообъекта с типом точка (метка).
-            var myPlacemark = new ymaps.Placemark([55.8, 37.8], {}, {
-                iconLayout: 'default#image',
-                iconImageHref: '/maps/d../../jsapi/doc/2.1/examples/images/myIcon.gif',
-                iconImageSize: [30, 42],
-                iconImageOffset: [-3, -42]
-            });
+            myMap.geoObjects
+                .add(myPlacemark)
+                .add(myPlacemarkWithContent);
         });
     </script>
 </body>

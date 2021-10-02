@@ -80,9 +80,41 @@
     justify-content: center;
     padding-bottom: 30px;
     min-height: calc(100vh - var(--height));
-    max-width: 645px;
+    max-width: 745px;
     width: 100%;
+    &__wrapper {
+        margin-bottom: 100px;
 
+        @media screen and (min-width: 768px) and (max-width: 1023px) {
+            margin-bottom: 70px;
+        }
+        @media screen and (max-width: 767px) {
+            margin-bottom: 50px;
+        }
+    }
+    &__block {
+        margin-top: 48px;
+
+        @media screen and (min-width: 768px) and (max-width: 1023px) {
+            margin-top: 36px;
+        }
+        @media screen and (max-width: 767px) {
+            margin-top: 30px;
+        }
+    }
+    &__subtitle {
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-weight: normal;
+
+        @media screen and (min-width: 768px) and (max-width: 1023px) {
+            font-size: 20px;
+        }
+        @media screen and (max-width: 767px) {
+            margin-bottom: 6px;
+            font-size: 18px;
+        }
+    }
     &__description {
         margin-top: 14px;
         font-size: 24px;
@@ -93,6 +125,25 @@
         }
         @media screen and (max-width: 767px) {
             font-size: 16px;
+        }
+    }
+    &__text {
+        display: block;
+        font-size: 18px;
+        font-weight: normal;
+        &--yellow {
+            color: $yellow-color;
+        }
+        
+        @media screen and (max-width: 767px) {
+            font-size: 14px;
+        }
+    }
+    &__text + &__btn {
+        margin-top: 40px;
+
+        @media screen and (max-width: 767px) {
+            margin-top: 30px;
         }
     }
     &__btn {
@@ -504,6 +555,22 @@
             width: 0;
             height: 0;
         }
+        &--wrap {
+            flex-wrap: wrap;
+            padding: 0;
+            overflow-x: hidden;
+            .projects__title {
+                margin-right: 32px;
+                margin-bottom: 20px;
+            }
+            .projects__checkbox {
+                margin-right: 20px;
+                margin-bottom: 20px;
+            }
+            .projects__checkbox + .projects__checkbox {
+                margin-left: 0;
+            }
+        }
     }
     &__input-group {
         @media screen and (min-width: 768px) {
@@ -580,8 +647,7 @@
             margin-top: 20px;
         }
     }
-    &__group + *,
-    &__btn + *:not(.tooltip__icon),
+    &__btn + *,
     &__input + * {
         @media screen and (min-width: 1200px) {
             margin-left: 40px;
@@ -602,12 +668,27 @@
             min-width: 100%;
         }
     }
+    &__tooltip {
+        margin-bottom: 20px;
+    }
     &__map {
         margin-top: 60px;
         width: 100%;
         height: 105px;
         &--active {
             height: 700px;
+        }
+
+        @media screen and (min-width: 768px) and (max-width: 1023px) {
+            &--active {
+                height: 550px;
+            }
+        }
+        @media screen and (max-width: 767px) {
+            margin-top: 30px;
+            &--active {
+                height: 400px;
+            }
         }
     }
     &__total {
