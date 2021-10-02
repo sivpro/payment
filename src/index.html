@@ -198,17 +198,17 @@
                     </div>
                     <div class="projects__list">
                         <label for="status-checkbox-01" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="status-checkbox-01">
-                            <span class="btn-checkbox__label">Под Аренду</span>
-                            <span class="btn-checkbox__icon"></span>
-                        </label>
-                        <label for="status-checkbox-02" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="status-checkbox-02">
+                            <input type="radio" name="status" class="btn-checkbox__input" id="status-checkbox-01">
                             <span class="btn-checkbox__label">Проживание</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
+                        <label for="status-checkbox-02" class="btn-checkbox projects__checkbox">
+                            <input type="radio" name="status" class="btn-checkbox__input" id="status-checkbox-02">
+                            <span class="btn-checkbox__label">Под Аренду</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
                         <label for="status-checkbox-03" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="status-checkbox-03">
+                            <input type="radio" name="status" class="btn-checkbox__input" id="status-checkbox-03">
                             <span class="btn-checkbox__label">Под продажу</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
@@ -256,7 +256,7 @@
                 </div>
                 <div class="projects__inner">
                     <div class="input-group projects__input-group">
-                        <input type="number" class="input-group__input" placeholder="Бюджет от">
+                        <input type="number" class="input-group__input" placeholder="Бюджет до">
                         <span class="input-group__help">р.</span>
                     </div>
                     <div class="projects__list">
@@ -412,11 +412,19 @@
                     </div>
                 </div>
                 <div class="projects__inner projects__inner--column">
-                    <a href="#" class="projects__btn btn btn--purple btn--sm">Рекомендуем по рейтингу</a>
+                    <label for="raiting-checkbox" class="btn-checkbox projects__checkbox">
+                        <input type="checkbox" class="btn-checkbox__input" id="raiting-checkbox">
+                        <span class="btn-checkbox__label">Рекомендуем по рейтингу</span>
+                        <span class="btn-checkbox__icon"></span>
+                    </label>
                     <div class="input-group projects__input">
-                        <input type="number" class="input-group__input" placeholder="Выбрать не более 3 вариантов">
+                        <input type="text" class="input-group__input" placeholder="Выбрать не более 3 вариантов">
                     </div>
-                    <a href="#" class="projects__btn btn btn--purple btn--sm">Посмотреть на карте</a>
+                    <label for="show-map-checkbox" class="btn-checkbox projects__checkbox">
+                        <input type="checkbox" class="btn-checkbox__input" id="show-map-checkbox">
+                        <span class="btn-checkbox__label">Посмотреть на карте</span>
+                        <span class="btn-checkbox__icon"></span>
+                    </label>
                 </div>
                 <!--<div class="projects__list">
                     <label for="apartment-checkbox-01" class="btn-checkbox projects__checkbox">
@@ -658,7 +666,7 @@
                         <span class="btn-checkbox__icon"></span>
                     </label>
                     <label for="tarif-checkbox-02" class="btn-checkbox modal__checkbox">
-                        <input type="radio" name="tarif" class="btn-checkbox__input" id="tarif-checkbox-02" required>
+                        <input type="radio" name="tarif" class="btn-checkbox__input" id="tarif-checkbox-02" required checked>
                         <span class="btn-checkbox__label">Подписка (8 отчётов) - <b>4 999</b> р.</span>
                         <span class="btn-checkbox__icon"></span>
                     </label>
@@ -747,8 +755,8 @@
                 // Опции.
                 iconLayout: 'default#image',
                 iconImageHref: 'img/dist/icon-mark.svg',
-                iconImageSize: [49, 72],
-                //iconImageOffset: [-24, -24],
+                iconImageSize: [28, 42],
+                //iconImageOffset: [-10, -10],
                 // Смещение слоя с содержимым относительно слоя с картинкой.
                 iconContentOffset: [15, 15],
                 // Макет содержимого.
@@ -763,7 +771,7 @@
                 // Опции.
                 iconLayout: 'default#image',
                 iconImageHref: 'img/dist/icon-mark.svg',
-                iconImageSize: [49, 72],
+                iconImageSize: [28, 42],
                 //iconImageOffset: [-24, -24],
                 // Смещение слоя с содержимым относительно слоя с картинкой.
                 iconContentOffset: [15, 15],

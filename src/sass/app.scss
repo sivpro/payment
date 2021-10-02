@@ -533,6 +533,14 @@
             align-items: center;
         }
         &--column {
+            @media screen and (max-width: 1199px) {
+                .projects__checkbox + .projects__checkbox,
+                .projects__checkbox + .projects__input,
+                .projects__input + .projects__checkbox {
+                    margin-top: 20px;
+                    margin-left: 0;
+                }
+            }
             @media screen and (min-width: 768px) and (max-width: 1199px) {
                 display: block;
             }
@@ -596,7 +604,9 @@
     &__input-group + &__checkbox {
         margin-left: 26px;
     }
-    &__checkbox + &__checkbox {
+    &__checkbox + &__checkbox,
+    &__checkbox + &__input,
+    &__input + &__checkbox {
         margin-left: 20px;
     }
     &__column {
@@ -645,18 +655,6 @@
     &__quantity + &__quantity {
         @media screen and (max-width: 767px) {
             margin-top: 20px;
-        }
-    }
-    &__btn + *,
-    &__input + * {
-        @media screen and (min-width: 1200px) {
-            margin-left: 40px;
-        }
-        @media screen and (min-width: 768px) and (max-width: 1199px) {
-            margin-top: 24px;
-        }
-        @media screen and (max-width: 767px) {
-            margin-top: 24px;
         }
     }
     &__input {
