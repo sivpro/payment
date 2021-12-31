@@ -338,7 +338,7 @@
                     </div>
                 </div>
             </div>
-            <div class="projects__wrapper">
+            <div class="projects__wrapper s-none">
                 <h3 class="projects__title">Возраст и число проживающих</h3>
                 <div class="projects__column">
                     <div class="quantity projects__quantity">
@@ -391,7 +391,7 @@
                     </div>
                 </div>
             </div>
-            <div class="projects__wrapper">
+            <div class="projects__wrapper s-none">
                 <div class="projects__inner">
                     <h3 class="projects__title">Ещё есть</h3>
                     <div class="projects__list">
@@ -422,9 +422,11 @@
                     </div>
                     <label for="show-map-checkbox" class="btn-checkbox projects__checkbox">
                         <input type="checkbox" class="btn-checkbox__input" id="show-map-checkbox">
-                        <span class="btn-checkbox__label">Посмотреть на карте</span>
+                        <span class="btn-checkbox__label" id="useMap_button">Посмотреть на карте</span>
                         <span class="btn-checkbox__icon"></span>
                     </label>
+
+                    <input type="hidden" name="compare_objects_type" value="" />
                 </div>
                 <!--<div class="projects__list">
                     <label for="apartment-checkbox-01" class="btn-checkbox projects__checkbox">
@@ -444,7 +446,8 @@
                     </label>
                 </div>-->
             </div>
-            <div class="projects__map projects__map--active" id="YMapsID"></div> <!-- Чтобы свернуть карту - нужно убрать класс projects__map--active -->
+            <div class="projects__map _projects__map--active" id="YMapsID">
+            </div> <!-- Чтобы свернуть карту - нужно убрать класс projects__map--active -->
             <div class="projects__wrapper">
                 <div class="tooltip projects__tooltip">
                     <h3 class="projects__title">Что сравниваем</h3>
@@ -732,11 +735,13 @@
     <script src="js/app.min.js"></script>
     <script src="https://api-maps.yandex.ru/2.1/?apikey=6bbdf00b-d01b-420e-8ea2-2ca9c741ee6c&lang=ru_RU" type="text/javascript"></script>
     <script type="text/javascript">
+        var myMap;
         ymaps.ready(function () {
-            var myMap = new ymaps.Map('YMapsID', {
+             myMap = new ymaps.Map('YMapsID', {
                 center: [55.751574, 37.573856],
                 zoom: 9
             }),
+
 
             // Создаём макет содержимого.
             MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
@@ -749,7 +754,11 @@
                     Студии от 5 890 000 р.
                     1-комн. от 7 236 000 р.
                 </div>`
-            ),
+            )
+
+
+            /*,
+
 
             myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
                 hintContent: 'Magnolia Park',
@@ -786,7 +795,65 @@
             myMap.geoObjects
                 .add(myPlacemark)
                 .add(myPlacemarkWithContent);
+
+            */
         });
+        //myMap.controls.remove('searchControl');
+        const useMapButton = document.getElementById('useMap_button');
+        const mapWrapper = document.getElementById('YMapsID');
+        useMapButton.addEventListener('click',() => {
+
+            let gCollection = new ymaps.GeoObjectCollection(null, {
+                preset: 'islands#blueIcon'
+            });
+            console.log(mapWrapper.classList.contains('projects__map--active'));
+
+            if(mapWrapper.classList.contains('projects__map--active')) {
+                myMap.geoObjects.each(function (geoObject) {
+                    //geoObject.remove();
+                    myMap.geoObjects.remove(geoObject);
+                });
+
+                mapWrapper.classList.remove('projects__map--active');
+                myMap.container.fitToViewport();
+            }
+            else {
+
+                mapWrapper.classList.add('projects__map--active');
+                myMap.container.fitToViewport();
+
+                gCollection.add(new ymaps.Placemark([55.71554, 37.554265],{
+                    hintContent: 'Magnolia Park',
+                    balloonContent: 'А эта — новогодняя',
+                    iconContent: '12'
+                }));
+                gCollection.add(new ymaps.Placemark([55.71554, 37.454265]));
+                gCollection.add(new ymaps.Placemark([55.61554,37.554265]));
+
+                myMap.geoObjects.add(gCollection);
+
+            }
+
+        } )
+
+
+    </script>
+
+    <script type="application/json" id="map-points">
+        [
+            {
+                "cords":  [55.800434123328664,37.913230695312514],
+                "title": "Метка 1"
+            },
+            {
+                "cords":  [55.707629064640194,37.469839704628086],
+                "title": "Метка 2"
+            },
+            {
+                "cords":  [55.64865482240896,37.656607282753086],
+                "title": "Метка 3"
+            }
+        ]
     </script>
 </body>
 </html>
