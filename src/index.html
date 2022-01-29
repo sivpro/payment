@@ -179,104 +179,68 @@
     <section class="projects" id="projects">
         <div class="container">
             <h2 class="section-heading">Выбор проектов для сравнения</h2>
-            <div class="projects__wrapper">
+            <div class="projects__wrapper what_need" id="what_need_wrapper">
                 <h3 class="projects__title">Что нужно</h3>
                 <div class="projects__inner">
-                    <div class="input-group projects__input-group">
-                        <input type="text" class="input-group__input" placeholder="Регион">
+                    <div class="input-group projects__input-group" tabindex="0">
+                        <input id="cities_placeholder" type="text" class="input-group__input" placeholder="Регион" value="">
                         <ul class="input-dropdown">
-                            <li class="input-dropdown__item">
-                                <a href="#" class="input-dropdown__link">Москва</a>
-                            </li>
-                            <li class="input-dropdown__item">
-                                <a href="#" class="input-dropdown__link">Волгоград</a>
-                            </li>
-                            <li class="input-dropdown__item">
-                                <a href="#" class="input-dropdown__link">Санкт-Петербург</a>
+                            <li class="input-dropdown__item city_item">
+                                <a href="#" class="input-dropdown__link city_item" data-city="msk">Москва</a>
                             </li>
                         </ul>
                     </div>
-                    <div class="projects__list">
-                        <label for="status-checkbox-01" class="btn-checkbox projects__checkbox">
-                            <input type="radio" name="status" class="btn-checkbox__input" id="status-checkbox-01">
+                    <div class="projects__list" id="for_what_wrapper">
+                        <label for="for_home" class="btn-checkbox projects__checkbox">
+                            <input type="radio" name="for_what" class="btn-checkbox__input for_what" id="for_home" value="for_home">
                             <span class="btn-checkbox__label">Проживание</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="status-checkbox-02" class="btn-checkbox projects__checkbox">
-                            <input type="radio" name="status" class="btn-checkbox__input" id="status-checkbox-02">
+                        <label for="for_rent" class="btn-checkbox projects__checkbox">
+                            <input type="radio" name="for_what" class="btn-checkbox__input for_what" id="for_rent" value="for_rent">
                             <span class="btn-checkbox__label">Под Аренду</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="status-checkbox-03" class="btn-checkbox projects__checkbox">
-                            <input type="radio" name="status" class="btn-checkbox__input" id="status-checkbox-03">
+                        <label for="for_sale" class="btn-checkbox projects__checkbox">
+                            <input type="radio" name="for_what" class="btn-checkbox__input for_what" id="for_sale" value="for_sale">
                             <span class="btn-checkbox__label">Под продажу</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
                     </div>
                 </div>
-                <div class="projects__inner">
+                <div class="projects__inner" id="region_wrapper">
                     <div class="input-group projects__input-group">
-                        <input type="text" class="input-group__input" placeholder="Район любой">
-                        <ul class="input-dropdown">
-                            <li class="input-dropdown__item">
-                                <a href="#" class="input-dropdown__link">Тверской</a>
-                            </li>
-                            <li class="input-dropdown__item">
-                                <a href="#" class="input-dropdown__link">Арбатский</a>
-                            </li>
-                            <li class="input-dropdown__item">
-                                <a href="#" class="input-dropdown__link">Васильковский</a>
-                            </li>
-                            <li class="input-dropdown__item">
-                                <a href="#" class="input-dropdown__link">Сумской</a>
-                            </li>
-                            <li class="input-dropdown__item">
-                                <a href="#" class="input-dropdown__link">Тверской</a>
-                            </li>
-                            <li class="input-dropdown__item">
-                                <a href="#" class="input-dropdown__link">Васильковский</a>
-                            </li>
-                            <li class="input-dropdown__item">
-                                <a href="#" class="input-dropdown__link">Арбатский</a>
-                            </li>
+                        <input id="regions_placeholder" type="text" class="input-group__input" placeholder="Район любой">
+                        <ul class="input-dropdown" id="regions_li" style="z-index:9;">
                         </ul>
                     </div>
-                    <!--<div class="projects__list">
-                        <label for="area-checkbox-01" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="area-checkbox-01">
-                            <span class="btn-checkbox__label">Тверской</span>
-                            <span class="btn-checkbox__icon"></span>
-                        </label>
-                        <label for="area-checkbox-02" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="area-checkbox-02">
-                            <span class="btn-checkbox__label">Арбатский</span>
-                            <span class="btn-checkbox__icon"></span>
-                        </label>
-                    </div>-->
+                    <div class="projects__list" id="regions_buttons">
+
+                    </div>
                 </div>
                 <div class="projects__inner">
                     <div class="input-group projects__input-group">
-                        <input type="number" class="input-group__input" placeholder="Бюджет до">
+                        <input type="number" class="input-group__input" id="flat-budget" placeholder="Бюджет до">
                         <span class="input-group__help">р.</span>
                     </div>
-                    <div class="projects__list">
-                        <label for="price-checkbox-01" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="price-checkbox-01">
+                    <div class="projects__list" id="class_flat_wrapper">
+                        <label for="class_comfort" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input class_flat_button" id="class_comfort">
                             <span class="btn-checkbox__label">Комфорт</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="price-checkbox-02" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="price-checkbox-02">
+                        <label for="class_business" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input class_flat_button" id="class_business">
                             <span class="btn-checkbox__label">Бизнес</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="price-checkbox-03" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="price-checkbox-03">
+                        <label for="class_premium" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input class_flat_button" id="class_premium">
                             <span class="btn-checkbox__label">Премиум</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="price-checkbox-04" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="price-checkbox-04">
+                        <label for="class_elite" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input class_flat_button" id="class_elite">
                             <span class="btn-checkbox__label">Элитный</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
@@ -284,32 +248,32 @@
                 </div>
                 <div class="projects__inner">
                     <div class="input-group projects__input-group">
-                        <input type="number" class="input-group__input" placeholder="Площадь от">
+                        <input type="number" class="input-group__input" id="flat-aria" placeholder="Площадь от">
                         <span class="input-group__help">м<sup>2</sup></span>
                     </div>
-                    <div class="projects__list">
-                        <label for="type-checkbox-01" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="type-checkbox-01">
+                    <div class="projects__list" id="type_flat_wrapper">
+                        <label for="type_studio" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input type_flat_button" id="type_studio">
                             <span class="btn-checkbox__label">Студия</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="type-checkbox-02" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="type-checkbox-02">
+                        <label for="type_one_room" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input type_flat_button" id="type_one_room">
                             <span class="btn-checkbox__label">1-комн. и 2Е</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="type-checkbox-03" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="type-checkbox-03">
+                        <label for="type_two_room" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input type_flat_button" id="type_two_room">
                             <span class="btn-checkbox__label">2-комн. и 3Е</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="type-checkbox-04" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="type-checkbox-04">
+                        <label for="type_three_room" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input type_flat_button" id="type_three_room">
                             <span class="btn-checkbox__label">3-комн. и 4Е</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="type-checkbox-05" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="type-checkbox-05">
+                        <label for="type_four_room" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input type_flat_button" id="type_four_room">
                             <span class="btn-checkbox__label">4 комн.+</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
@@ -319,26 +283,26 @@
             <div class="projects__wrapper">
                 <div class="projects__inner">
                     <h3 class="projects__title">Тоже важно</h3>
-                    <div class="projects__list">
-                        <label for="required-checkbox-01" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="required-checkbox-01">
+                    <div class="projects__list" id='important_wrapper'>
+                        <label for="important_metro" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input important_for_flat" id="important_metro">
                             <span class="btn-checkbox__label">Метро</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="required-checkbox-02" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="required-checkbox-02">
+                        <label for="important_finish" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input important_for_flat" id="important_finish">
                             <span class="btn-checkbox__label">Отделка</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="required-checkbox-03" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="required-checkbox-03">
+                        <label for="important_parking" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input important_for_flat" id="important_parking">
                             <span class="btn-checkbox__label">Парковка</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
                     </div>
                 </div>
             </div>
-            <div class="projects__wrapper s-none">
+            <div class="projects__wrapper s-none" id="people_wrapper">
                 <h3 class="projects__title">Возраст и число проживающих</h3>
                 <div class="projects__column">
                     <div class="quantity projects__quantity">
@@ -391,12 +355,12 @@
                     </div>
                 </div>
             </div>
-            <div class="projects__wrapper s-none">
+            <div class="projects__wrapper s-none" id="people_add_wrapper">
                 <div class="projects__inner">
                     <h3 class="projects__title">Ещё есть</h3>
                     <div class="projects__list">
-                        <label for="pets-checkbox-01" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="pets-checkbox-01">
+                        <label for="flat_for_dog" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="flat_for_dog">
                             <span class="btn-checkbox__label">Собака</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
@@ -414,11 +378,14 @@
                 <div class="projects__inner projects__inner--column">
                     <label for="raiting-checkbox" class="btn-checkbox projects__checkbox">
                         <input type="checkbox" class="btn-checkbox__input" id="raiting-checkbox">
-                        <span class="btn-checkbox__label">Рекомендуем по рейтингу</span>
+                        <span class="btn-checkbox__label" id="by_raiting_button">Рекомендуем по рейтингу</span>
                         <span class="btn-checkbox__icon"></span>
                     </label>
-                    <div class="input-group projects__input">
-                        <input type="text" class="input-group__input" placeholder="Выбрать не более 3 вариантов">
+                    <div class="input-group projects__input-group" id="available_projects" style="margin-left:20px; margin-right:20px;min-width:334px;">
+                        <input type="text" class="input-group__input" placeholder="Выбрать не более 3 вариантов" style="max-width:100%;">
+                        <ul class="input-dropdown" id="available_projects_list">
+
+                        </ul>
                     </div>
                     <label for="show-map-checkbox" class="btn-checkbox projects__checkbox">
                         <input type="checkbox" class="btn-checkbox__input" id="show-map-checkbox">
@@ -428,23 +395,10 @@
 
                     <input type="hidden" name="compare_objects_type" value="" />
                 </div>
-                <!--<div class="projects__list">
-                    <label for="apartment-checkbox-01" class="btn-checkbox projects__checkbox">
-                        <input type="checkbox" class="btn-checkbox__input" id="apartment-checkbox-01">
-                        <span class="btn-checkbox__label">Магнолия</span>
-                        <span class="btn-checkbox__icon"></span>
-                    </label>
-                    <label for="apartment-checkbox-02" class="btn-checkbox projects__checkbox">
-                        <input type="checkbox" class="btn-checkbox__input" id="apartment-checkbox-02">
-                        <span class="btn-checkbox__label">ORDESSA</span>
-                        <span class="btn-checkbox__icon"></span>
-                    </label>
-                    <label for="apartment-checkbox-03" class="btn-checkbox projects__checkbox">
-                        <input type="checkbox" class="btn-checkbox__input" id="apartment-checkbox-03">
-                        <span class="btn-checkbox__label">Золотой одуванчик</span>
-                        <span class="btn-checkbox__icon"></span>
-                    </label>
-                </div>-->
+                <!--Выбранные жк -->
+                <div class="projects__list" id="selected_jk">
+
+                </div>
             </div>
             <div class="projects__map _projects__map--active" id="YMapsID">
             </div> <!-- Чтобы свернуть карту - нужно убрать класс projects__map--active -->
@@ -457,105 +411,146 @@
                     </div>
                 </div>
                 <div class="projects__inner">
-                    <div class="projects__list projects__list--wrap">
+                    <div class="projects__list projects__list--wrap" id="report_needs">
                         <h3 class="projects__title">Исключи ненужное</h3>
-                        <label for="variants-checkbox-01" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-01" checked>
+                        <label for="variants-checkbox-01" class="btn-checkbox projects__checkbox report_need_include">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-01" checked data-value="Образование и медицина вокруг">
                             <span class="btn-checkbox__label">Образование и медицина вокруг</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="variants-checkbox-02" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-02" checked>
+                        <label for="variants-checkbox-02" class="btn-checkbox projects__checkbox report_need_include">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-02" data-value="Благоустройство ЖК" checked>
                             <span class="btn-checkbox__label">Благоустройство ЖК</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="variants-checkbox-03" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-03" checked>
+                        <label for="variants-checkbox-03" class="btn-checkbox projects__checkbox report_need_include">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-03" data-value="Парки и набережные" checked>
                             <span class="btn-checkbox__label">Парки и набережные</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="variants-checkbox-04" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-04" checked>
+                        <label for="variants-checkbox-04" class="btn-checkbox projects__checkbox report_need_include">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-04" data-value="Негативное соседство" checked>
                             <span class="btn-checkbox__label">Негативное соседство</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="variants-checkbox-05" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-05" checked>
+                        <label for="variants-checkbox-05" class="btn-checkbox projects__checkbox report_need_include">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-05" data-value="Инфраструктура ЖК" checked>
                             <span class="btn-checkbox__label">Инфраструктура ЖК</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="variants-checkbox-06" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-06" checked>
+                        <label for="variants-checkbox-06" class="btn-checkbox projects__checkbox report_need_include">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-06" data-value="Безопасность в ЖК" checked>
                             <span class="btn-checkbox__label">Безопасность в ЖК</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="variants-checkbox-07" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-07" checked>
+                        <label for="variants-checkbox-07" class="btn-checkbox projects__checkbox report_need_include">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-07" data-value="Материалы строительства" checked>
                             <span class="btn-checkbox__label">Материалы строительства</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="variants-checkbox-08" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-08" checked>
+                        <label for="variants-checkbox-08" class="btn-checkbox projects__checkbox report_need_include">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-08" data-value="Характеристика квартир" checked>
                             <span class="btn-checkbox__label">Характеристика квартир</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="variants-checkbox-09" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-09" checked>
+                        <label for="variants-checkbox-09" class="btn-checkbox projects__checkbox report_need_include">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-09" data-value="Характеристика домов" checked>
                             <span class="btn-checkbox__label">Характеристика домов</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="variants-checkbox-10" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-10" checked>
+                        <label for="variants-checkbox-10" class="btn-checkbox projects__checkbox report_need_include">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-10" data-value="Инженерия" checked>
                             <span class="btn-checkbox__label">Инженерия</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="variants-checkbox-11" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-11" checked>
+                        <label for="variants-checkbox-11" class="btn-checkbox projects__checkbox report_need_include">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-11" data-value="Метро и электрички" checked>
                             <span class="btn-checkbox__label">Метро и электрички</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="variants-checkbox-12" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-12" checked>
+                        <label for="variants-checkbox-12" class="btn-checkbox projects__checkbox report_need_include">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-12" data-value="Для собак" checked>
                             <span class="btn-checkbox__label">Для собак</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="variants-checkbox-13" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-13" checked>
+                        <label for="variants-checkbox-13" class="btn-checkbox projects__checkbox report_need_include">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-13" data-value="МОП" checked>
                             <span class="btn-checkbox__label">МОП</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="variants-checkbox-14" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="variants-checkbox-14" checked>
+                        <label for="variants-checkbox-14" class="btn-checkbox projects__checkbox report_need_include">
+                            <input type="checkbox" class="btn-checkbox__input" data-value="Торговля" id="variants-checkbox-14" checked>
                             <span class="btn-checkbox__label">Торговля</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
                     </div>
                 </div>
                 <div class="projects__inner">
-                    <div class="projects__list projects__list--wrap">
+                    <div class="projects__list projects__list--wrap" id="report_no_needs">
                         <h3 class="projects__title">Добавь нужное</h3>
-                        <label for="variants-add-checkbox-01" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="variants-add-checkbox-01">
+                        <label for="variants-add-checkbox-01" class="btn-checkbox projects__checkbox report_need_include">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-add-checkbox-01" data-value="Отделка">
                             <span class="btn-checkbox__label">Отделка</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="variants-add-checkbox-02" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="variants-add-checkbox-02">
+                        <label for="variants-add-checkbox-02" class="btn-checkbox projects__checkbox report_need_include">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-add-checkbox-02" data-value="Парковка">
                             <span class="btn-checkbox__label">Парковка</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
-                        <label for="variants-add-checkbox-03" class="btn-checkbox projects__checkbox">
-                            <input type="checkbox" class="btn-checkbox__input" id="variants-add-checkbox-03">
+                        <label for="variants-add-checkbox-03" class="btn-checkbox projects__checkbox report_need_include">
+                            <input type="checkbox" class="btn-checkbox__input" id="variants-add-checkbox-03" data-value="Условия">
                             <span class="btn-checkbox__label">Условия</span>
                             <span class="btn-checkbox__icon"></span>
                         </label>
                     </div>
                 </div>
             </div>
-            <div class="projects__total">
-                <span class="projects__text">Подходит проектов 73</span>
-                <a href="#" class="projects__btn btn modal-btn" data-id="order">Выбрать проекты</a>
+            <div class="projects__total" id="total_wrapper" style="display:none;">
+                <span class="projects__text">Подходит проектов <span id="total"></span></span>
+                <a href="#" class="projects__btn btn modal-btn" id="get_projects_button" data-id="order">Выбрать проекты</a>
             </div>
+        </div>
+        <div style="display:none">
+                <form id="calc">
+                    <input type="text" name="budget" data-id="flat-budget" />
+                    <input type="text" name="area" data-id="flat-area" />
+                    <input type="text" name="for_what" data-id="for_what" value="for_home" />
+                    <input type="checkbox" class="btn-checkbox__input" data-id="class_comfort" name="flat_class[]" value="comfort">
+                    <input type="checkbox" class="btn-checkbox__input" data-id="class_business" name="flat_class[]" value="business">
+                    <input type="checkbox" class="btn-checkbox__input" data-id="class_premium" name="flat_class[]" value="premium">
+                    <input type="checkbox" class="btn-checkbox__input" data-id="class_elite" name="flat_class[]" value="elite">
+
+                    <input type="checkbox" class="btn-checkbox__input" data-id="type_studio" name="flat_type[]" value="studio">
+                    <input type="checkbox" class="btn-checkbox__input" data-id="type_one_room" name="flat_type[]" value="one_room">
+                    <input type="checkbox" class="btn-checkbox__input" data-id="type_two_room" name="flat_type[]" value="two_room">
+                    <input type="checkbox" class="btn-checkbox__input" data-id="type_three_room" name="flat_type[]" value="three_room">
+                    <input type="checkbox" class="btn-checkbox__input" data-id="type_four_room" name="flat_type[]" value="four_room">
+
+                    <input type="checkbox" class="" data-id="important_metro" name="important_metro" value="1" />
+                    <input type="checkbox" class="" data-id="important_finish" name="important_finish" value="1" />
+                    <input type="checkbox" class="" data-id="important_parking" name="important_parking" value="1" />
+
+                    <input type="checkbox" class="" data-id="flat_for_dog" name="flat_for_dog" value="1" />
+
+                    <input type="text" class="" name="report_includes[]" value="Образование и медицина вокруг" />
+                    <input type="text" class="" name="report_includes[]" value="Благоустройство ЖК" />
+                    <input type="text" class="" name="report_includes[]" value="Парки и набережные" />
+                    <input type="text" class="" name="report_includes[]" value="Негативное соседство" />
+                    <input type="text" class="" name="report_includes[]" value="Инфраструктура ЖК" />
+                    <input type="text" class="" name="report_includes[]" value="Безопасность в ЖК" />
+                    <input type="text" class="" name="report_includes[]" value="Материалы строительства" />
+                    <input type="text" class="" name="report_includes[]" value="Характеристика квартир" />
+                    <input type="text" class="" name="report_includes[]" value="Характеристика домов" />
+                    <input type="text" class="" name="report_includes[]" value="Инженерия" />
+                    <input type="text" class="" name="report_includes[]" value="Метро и электрички" />
+                    <input type="text" class="" name="report_includes[]" value="Для собак" />
+                    <input type="text" class="" name="report_includes[]" value="МОП" />
+                    <input type="text" class="" name="report_includes[]" value="Торговля" />
+                    <input type="text" class="" name="report_includes[]" value="Отделка" />
+                    <input type="text" class="" name="report_includes[]" value="Парковка" />
+                    <input type="text" class="" name="report_includes[]" value="Условия" />
+                </form>
         </div>
     </section>
     <!-- End of projects -->
@@ -736,10 +731,12 @@
     <script src="https://api-maps.yandex.ru/2.1/?apikey=6bbdf00b-d01b-420e-8ea2-2ca9c741ee6c&lang=ru_RU" type="text/javascript"></script>
     <script type="text/javascript">
         var myMap;
+        var objectManager;
         ymaps.ready(function () {
              myMap = new ymaps.Map('YMapsID', {
-                center: [55.751574, 37.573856],
-                zoom: 9
+                 center: [55.751574, 37.573856],
+                 controls: ['zoomControl','typeSelector', 'fullscreenControl', 'routeButtonControl'],
+                 zoom: 9
             }),
 
 
@@ -756,15 +753,16 @@
                 </div>`
             )
 
-
-            /*,
+            /*
+            ,
 
 
             myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
                 hintContent: 'Magnolia Park',
                 balloonContent: 'Это красивая метка',
                 iconContent: '1232'
-            }, {
+            },
+                {
                 // Опции.
                 iconLayout: 'default#image',
                 iconImageHref: 'img/dist/icon-mark.svg',
@@ -780,7 +778,8 @@
                 hintContent: 'Magnolia Park',
                 balloonContent: 'А эта — новогодняя',
                 iconContent: '12'
-            }, {
+            },
+                {
                 // Опции.
                 iconLayout: 'default#image',
                 iconImageHref: 'img/dist/icon-mark.svg',
@@ -796,11 +795,59 @@
                 .add(myPlacemark)
                 .add(myPlacemarkWithContent);
 
+
             */
+
+            objectManager = new ymaps.ObjectManager({
+                // Чтобы метки начали кластеризоваться, выставляем опцию.
+                clusterize: true,
+                // ObjectManager принимает те же опции, что и кластеризатор.
+                gridSize: 32,
+                clusterDisableClickZoom: false
+            });
+            //objectManager.objects.options.set('preset', 'islands#greenDotIcon');
+            objectManager.objects.options.set({
+                iconLayout: 'default#image',
+                iconImageHref: '/img/dist/icon-mark.svg',
+                iconImageSize: [32, 38],
+                iconImageOffset: [-20, -40]
+            });
+
+            objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
+            myMap.geoObjects.add(objectManager);
+
+
+            myMap.events.add('click', function (e) {
+                // Получение координат щелчка
+                //var coords = e.get('coords');
+                //alert(coords.join(', '));
+            });
+            myMap.events.add('dblclick', function (e) {
+                //e.preventDefault(); // При двойном щелчке зума не будет.
+            });
         });
+
+
+        function getDataForMap() {
+            let response = fetch('/js/data.json', {
+                method: 'GET',
+                //body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(
+                    result => {
+                        console.log(result);
+                        console.log(objectManager.add(result))
+                    }
+                    //myMap.ObjectManager.add(result)
+                )
+        }
+
+
         //myMap.controls.remove('searchControl');
         const useMapButton = document.getElementById('useMap_button');
         const mapWrapper = document.getElementById('YMapsID');
+
         useMapButton.addEventListener('click',() => {
 
             let gCollection = new ymaps.GeoObjectCollection(null, {
@@ -822,6 +869,7 @@
                 mapWrapper.classList.add('projects__map--active');
                 myMap.container.fitToViewport();
 
+                /*
                 gCollection.add(new ymaps.Placemark([55.71554, 37.554265],{
                     hintContent: 'Magnolia Park',
                     balloonContent: 'А эта — новогодняя',
@@ -832,9 +880,16 @@
 
                 myMap.geoObjects.add(gCollection);
 
+                 */
+
             }
 
         } )
+
+
+
+
+
 
 
     </script>

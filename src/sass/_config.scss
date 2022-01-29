@@ -174,6 +174,29 @@ svg {
             color: $white-color;
             background: $light-purple-color;
         }
+        &:checked ~ .btn-checkbox__icon {
+            display:block;
+            position: relative;
+        }
+        &:checked ~ .btn-checkbox__icon::after {
+            content: "";
+            position: absolute;
+            width: 21px;
+            height: 21px;
+            color: $pink-color;
+            background: url(../img/dist/sprite.svg#icon-close);
+            filter: invert(100%) sepia(87%) saturate(1640%) hue-rotate(181deg) brightness(104%) contrast(80%);
+            right: -1px;
+            top: -3px;
+        }
+        &:checked ~ .btn-checkbox__icon > svg{
+            position: absolute;
+            width: 21px;
+            height: 21px;
+            background: url(../img/dist/sprite.svg#icon-close);
+            right: -1px;
+            top: -1px;
+        }
     }
     &__label {
         display: block;
@@ -195,6 +218,9 @@ svg {
         @media screen and (max-width: 767px) {
             padding: 10.5px 20px;
         }
+    }
+    &__icon {
+        display:none;
     }
 }
 
@@ -287,8 +313,11 @@ svg {
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
     transition: all 0.25s;
     &--active {
+        display:block;
         max-height: 144px;
+        //max-height: inherit;
         opacity: 1;
+        z-index: 9999;
     }
     &__link {
         display: block;
