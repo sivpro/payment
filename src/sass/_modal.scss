@@ -73,6 +73,13 @@
     &__block + &__block {
         margin-top: 45px;
     }
+    &__block.promo_block {
+        display: none;
+    }
+    &__block.promo_block.show_promo_block{
+        display: block;
+    }
+
     &__title {
         margin-bottom: 20px;
         font-size: 18px;
@@ -155,5 +162,15 @@
         @media screen and (max-width: 767px) {
             margin-top: 20px;
         }
+    }
+
+    #subscription {
+        display: none;
+    }
+    #no_subscription {
+        display: none;
+    }
+    .show_subscription {
+        display: block !important;
     }
 }

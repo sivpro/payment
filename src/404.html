@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404</title>
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/vendor.min.css">
+    <link rel="stylesheet" href="css/app.min.css">
+</head>
+<body>
+<!-- Main -->
+<section class="main" id="main">
+    <div class="container">
+        <!-- Header -->
+        <header class="header" id="header">
+            <div class="header__wrapper">
+                <div>
+                    <div>Ой... 404</div>
+                    <div>у нас нет страницы с таким адресом</div>
+                </div>
+                <a href="#" class="logotype">
+                    <img src="img/dist/logotype.svg" alt="Лого">
+                </a>
+                <div class="header__group">
+                    <nav class="nav header__nav">
+                        <ul class="nav__list">
+                            <li class="nav__item">
+                                <a href="tarifs.html" class="nav__link">Тарифы</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="socials header__socials">
+                        <ul class="socials__list">
+                            <li class="socials__item">
+                                <a href="#" class="socials__link" aria-label="Telegram">
+                                    <svg class="socials__icon">
+                                        <use xlink:href="img/dist/sprite.svg#icon-telegram"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="socials__item">
+                                <a href="#" class="socials__link" aria-label="YouTube">
+                                    <svg class="socials__icon">
+                                        <use xlink:href="img/dist/sprite.svg#icon-youtube"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="socials__item">
+                                <a href="#" class="socials__link" aria-label="Facebook">
+                                    <svg class="socials__icon">
+                                        <use xlink:href="img/dist/sprite.svg#icon-facebook"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="socials__item">
+                                <a href="#" class="socials__link" aria-label="Instagram">
+                                    <svg class="socials__icon">
+                                        <use xlink:href="img/dist/sprite.svg#icon-instagram"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- End of header -->
+        <div class="container" style="text-align:center">
+            <a href="/">
+                <img src="img/dist/logotype.svg" style="width:500px;" alt="Лого">
+            </a>
+            <div>
+                <h2>Выбор лучшего - это всегда сравнение</h2>
+                <p>Сравни новостройки за 7 минут</p>
+                <a href="#" class="projects__btn btn modal-btn">Начнём</a>
+            </div>
+
+
+        </div>
+        <a href="#howitworks" class="main__arrow" aria-label="Перейти ниже"></a>
+    </div>
+</section>
+<!-- End of main -->
+
+
+<!-- Footer -->
+<footer class="footer" id="footer">
+    <div class="container">
+        <a href="#" class="logotype">
+            <img src="img/dist/logotype.svg" alt="Лого">
+        </a>
+        <nav class="nav footer__nav">
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a href="tarifs.html" class="nav__link">Тарифы</a>
+                </li>
+                <li class="nav__item">
+                    <a href="#howitworks" class="nav__link">Как это работает</a>
+                </li>
+                <li class="nav__item">
+                    <a href="#" class="nav__link">Пользовательское соглашение</a>
+                </li>
+                <li class="nav__item">
+                    <a href="#" class="nav__link">Политика конфиденциальности</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="socials footer__socials">
+            <ul class="socials__list">
+                <li class="socials__item">
+                    <a href="#" class="socials__link" aria-label="Telegram">
+                        <svg class="socials__icon">
+                            <use xlink:href="img/dist/sprite.svg#icon-telegram"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li class="socials__item">
+                    <a href="#" class="socials__link" aria-label="YouTube">
+                        <svg class="socials__icon">
+                            <use xlink:href="img/dist/sprite.svg#icon-youtube"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li class="socials__item">
+                    <a href="#" class="socials__link" aria-label="Facebook">
+                        <svg class="socials__icon">
+                            <use xlink:href="img/dist/sprite.svg#icon-facebook"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li class="socials__item">
+                    <a href="#" class="socials__link" aria-label="Instagram">
+                        <svg class="socials__icon">
+                            <use xlink:href="img/dist/sprite.svg#icon-instagram"></use>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</footer>
+<!-- End of footer -->
+<!-- Modal -->
+<div class="modal" id="order">
+    <button class="modal__close" aria-label="Закрыть">
+        <svg class="modal__close--icon">
+            <use xlink:href="img/dist/sprite.svg#icon-close"></use>
+        </svg>
+    </button>
+    <form action="#" class="modal__content" id="request_report">
+        <div class="modal__block">
+            <h3 class="modal__title">Контакты для визитки в отчёте</h3>
+            <div class="modal__inner">
+                <div class="input-group modal__input-group">
+                    <input type="tel" class="input-group__input form" name="form_telephone" placeholder="+7 (000) 000-00-00" data-inputmask="'mask': '+7 (999) 999 99 99'" inputmode="tel" required>
+                </div>
+                <div class="input-group modal__input-group">
+                    <input type="text" class="input-group__input form" name="form_name" placeholder="Имя Фамилия" required>
+                </div>
+            </div>
+        </div>
+        <div class="modal__block">
+            <h3 class="modal__title">Куда выслать отчёт</h3>
+            <div class="modal__inner">
+                <div class="input-group modal__input-group">
+                    <input type="email" class="input-group__input form" placeholder="E-mail" required name="form_email">
+                </div>
+                <div class="input-group modal__input-group">
+                    <input type="tel" class="input-group__input form"  name="form_report_telephone" placeholder="+7 (000) 000-00-00" data-inputmask="'mask': '+7 (999) 999 99 99'" inputmode="tel" required>
+                </div>
+                <div class="modal__group">
+                    <label for="icon-checkbox-01" class="icon-checkbox modal__checkbox">
+                        <input type="checkbox" name="form_telegram" class="icon-checkbox__input" id="icon-checkbox-01" value="1" checked>
+                        <svg class="icon-checkbox__icon">
+                            <use xlink:href="img/dist/sprite.svg#icon-telegram"></use>
+                        </svg>
+                    </label>
+                    <label for="icon-checkbox-02" class="icon-checkbox modal__checkbox">
+                        <input type="checkbox" name="form_whatsapp" class="icon-checkbox__input" id="icon-checkbox-02"  value="1">
+                        <svg class="icon-checkbox__icon">
+                            <use xlink:href="img/dist/sprite.svg#icon-whatsapp"></use>
+                        </svg>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="modal__block">
+            <h3 class="modal__title">Выбери подходящий тариф</h3>
+            <div class="modal__column">
+                <label for="tarif-checkbox-01" class="btn-checkbox modal__checkbox">
+                    <input type="radio" name="tarif" class="btn-checkbox__input" id="tarif-checkbox-01" required value="Разовый">
+                    <span class="btn-checkbox__label">Разовый (1 отчёт) - <b>999</b> р.</span>
+                    <span class="btn-checkbox__icon"></span>
+                </label>
+                <label for="tarif-checkbox-02" class="btn-checkbox modal__checkbox">
+                    <input type="radio" name="tarif" class="btn-checkbox__input" id="tarif-checkbox-02" required checked value="Подписка">
+                    <span class="btn-checkbox__label">Подписка (8 отчётов) - <b>4 999</b> р.</span>
+                    <span class="btn-checkbox__icon"></span>
+                </label>
+                <label for="tarif-checkbox-03" class="btn-checkbox modal__checkbox">
+                    <input type="radio" name="tarif" class="btn-checkbox__input" id="tarif-checkbox-03" required value="Уже есть">
+                    <span class="btn-checkbox__label">Уже есть подписка</span>
+                    <span class="btn-checkbox__icon"></span>
+                </label>
+            </div>
+        </div>
+        <div class="modal__bottom">
+            <span class="modal__help">Доступно отчётов: 6</span>
+            <button class="modal__btn btn">Получить отчёт</button>
+            <label for="checkbox-policy" class="square-checkbox modal__checkbox">
+                <input type="checkbox" class="square-checkbox__input" id="checkbox-policy" required checked>
+                <span class="square-checkbox__label">Я соглашаюсь с <a href="policy.html">политикой конфиденциальности</a></span>
+            </label>
+
+            <!-- If error -->
+            <!--<p class="modal__help">
+                Ой... не можем найти Вашу подписку<br>
+                Проверьте указанные телефоны или напишите нам
+            </p>
+            <div class="socials modal__socials">
+                <ul class="socials__list">
+                    <li class="socials__item">
+                        <a href="#" class="socials__link" aria-label="Telegram">
+                            <svg class="socials__icon">
+                                <use xlink:href="img/dist/sprite.svg#icon-telegram"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="socials__item">
+                        <a href="#" class="socials__link" aria-label="WhatsApp">
+                            <svg class="socials__icon">
+                                <use xlink:href="img/dist/sprite.svg#icon-whatsapp"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="socials__item">
+                        <a href="#" class="socials__link" aria-label="Facebook">
+                            <svg class="socials__icon">
+                                <use xlink:href="img/dist/sprite.svg#icon-facebook"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="socials__item">
+                        <a href="#" class="socials__link" aria-label="Instagram">
+                            <svg class="socials__icon">
+                                <use xlink:href="img/dist/sprite.svg#icon-instagram"></use>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>-->
+        </div>
+    </form>
+</div>
+<!--successModal-->
+<div class="modal" id="success">
+    <button class="modal__close" aria-label="Закрыть">
+        <svg class="modal__close--icon">
+            <use xlink:href="img/dist/sprite.svg#icon-close"></use>
+        </svg>
+    </button>
+    <div action="#" class="modal__content">
+        <div class="modal__block">
+            <h3 class="modal__title">Спасибо</h3>
+            <div class="modal__inner">
+                Отчет отправлен на составление
+            </div>
+        </div>
+        <div class="modal__block">
+
+        </div>
+        <div class="modal__bottom">
+            <button class="modal__btn btn">Жду</button>
+        </div>
+    </div>
+</div>
+
+<div class="overlay"></div>
+<!-- End of modal -->
+<!-- Scripts -->
+<script src="js/vendor.min.js"></script>
+
+<script src="https://api-maps.yandex.ru/2.1/?apikey=6bbdf00b-d01b-420e-8ea2-2ca9c741ee6c&lang=ru_RU" type="text/javascript"></script>
+<script type="text/javascript">
+    var myMap;
+    var objectManager;
+    ymaps.ready(function () {
+        myMap = new ymaps.Map('YMapsID', {
+            center: [55.751574, 37.573856],
+            controls: ['zoomControl','typeSelector', 'fullscreenControl', 'routeButtonControl'],
+            zoom: 9
+        });
+
+        objectManager = new ymaps.ObjectManager({
+            // Чтобы метки начали кластеризоваться, выставляем опцию.
+            clusterize: true,
+            // ObjectManager принимает те же опции, что и кластеризатор.
+            gridSize: 32,
+            clusterDisableClickZoom: false
+        });
+        //objectManager.objects.options.set('preset', 'islands#greenDotIcon');
+        objectManager.objects.options.set({
+            iconLayout: 'default#image',
+            iconImageHref: '/img/dist/icon-mark.svg',
+            iconImageSize: [28, 42],
+            iconImageOffset: [-20, -40]
+        });
+
+        objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
+        myMap.geoObjects.add(objectManager);
+
+
+        myMap.events.add('click', function (e) {
+            // Получение координат щелчка
+            //var coords = e.get('coords');
+            //alert(coords.join(', '));
+        });
+        myMap.events.add('dblclick', function (e) {
+            //e.preventDefault(); // При двойном щелчке зума не будет.
+        });
+    });
+
+
+    const useMapButton = document.getElementById('useMap_button');
+    const mapWrapper = document.getElementById('YMapsID');
+
+    useMapButton.addEventListener('click',() => {
+
+        let gCollection = new ymaps.GeoObjectCollection(null, {
+            preset: 'islands#blueIcon'
+        });
+        console.log(mapWrapper.classList.contains('projects__map--active'));
+
+        if(mapWrapper.classList.contains('projects__map--active')) {
+            myMap.geoObjects.each(function (geoObject) {
+                //geoObject.remove();
+                //myMap.geoObjects.remove(geoObject);
+            });
+
+            mapWrapper.classList.remove('projects__map--active');
+            myMap.container.fitToViewport();
+        }
+        else {
+
+            mapWrapper.classList.add('projects__map--active');
+            myMap.container.fitToViewport();
+
+
+        }
+
+    } )
+
+
+
+
+
+
+
+</script>
+<script src="js/app.min.js"></script>
+
+</body>
+</html>

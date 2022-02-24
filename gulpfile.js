@@ -69,7 +69,7 @@ function styles() {
 
 function scripts() {
 	return src(paths.scripts.src)
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(rename({ suffix: '.min' }))
         .pipe(dest(paths.scripts.dest))
         .pipe(browserSync.stream())

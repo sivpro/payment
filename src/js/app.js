@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // INPUTMASK
     Inputmask().mask(document.querySelectorAll('input'));
 
+
     // HEIGHT 100VH FIX FOR IOS
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -10,6 +11,28 @@ document.addEventListener('DOMContentLoaded', function () {
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
     });
+
+    // NUMBER WITH SPACES
+    function numberWithSpaces(x) {
+        if( x === ''){return '';}
+        //return parseInt(x.replace(/\s/g,'')).toLocaleString('ru');
+        var int = String(Math.trunc(x.replace(/\s/g,'')));
+        if(int.length <= 3) return int;
+        var space = 0;
+        var number = '';
+
+        for(var i = int.length - 1; i >= 0; i--) {
+            if(space === 3) {
+                number = ' ' + number;
+                space = 0;
+            }
+            number = int.charAt(i) + number;
+            space++;
+        }
+
+        return number;
+    }
+
     
     // SMOOTH SCROLL
     function currentYPosition() {
@@ -84,6 +107,21 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function GetURLParameter(sParam)
+    {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++)
+        {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] === sParam)
+            {
+                return sParameterName[1];
+            }
+        }
+    }
+
+
     // ALL LINKS SMOOTH SCROLL
     const allLinks = document.querySelectorAll('a[href^="#"]')
 
@@ -144,11 +182,24 @@ document.addEventListener('DOMContentLoaded', function () {
             quantityMinus[i].addEventListener('click', () => {
                 if ((quantityCountInput[i].value) * 1 >= 1) {
                     quantityCountInput[i].value = (quantityCountInput[i].value) * 1 - 1;
+                    quantityCountInput[i].dispatchEvent(new Event('change'));
                 }
             });
     
             quantityPlus[i].addEventListener('click', () => {
                 quantityCountInput[i].value = (quantityCountInput[i].value) * 1 + 1;
+                quantityCountInput[i].dispatchEvent(new Event('change'));
+            });
+
+        })
+    }
+
+    let people_numbers = document.querySelectorAll('.quantity__number');
+    if(people_numbers.length > 0) {
+        people_numbers.forEach((item) => {
+            item.addEventListener('change', function (event) {
+                console.log('Изменение проживающих');
+                document.querySelector('#calc > input[data-id="'+this.id+'"]').value = this.value;
             })
         })
     }
@@ -176,8 +227,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             item.addEventListener('focus', () => {
 
-                    if (item.nextElementSibling.classList.contains('input-dropdown')) {
-                        item.nextElementSibling.classList.add('input-dropdown--active')
+                    if(item.nextElementSibling) {
+                        if (item.nextElementSibling.classList.contains('input-dropdown')) {
+                            item.nextElementSibling.classList.add('input-dropdown--active')
+                        }
                     }
 
             })
@@ -193,20 +246,98 @@ document.addEventListener('DOMContentLoaded', function () {
 
                  */
                 setTimeout(function () {
-                    if (item.nextElementSibling.classList.contains('input-dropdown--active')) {
-                        item.nextElementSibling.classList.remove('input-dropdown--active')
-                        //document.getElementById('what_need_wrapper').style.setProperty('pointer-events','auto');
+                    if(item.nextElementSibling) {
+                        if (item.nextElementSibling.classList.contains('input-dropdown--active')) {
+                            item.nextElementSibling.classList.remove('input-dropdown--active')
+                            //document.getElementById('what_need_wrapper').style.setProperty('pointer-events','auto');
 
+                        }
                     }
                 },100);
                 //}
             })
+
+            item.addEventListener('keyup', (event) => {
+                let input, filter, i, txtValue,txtValue_ru, a, li, ul;
+                input = event.target;
+                ul = input.nextElementSibling;
+                filter = input.value.toUpperCase();
+
+                if(ul) {
+                    li = ul.getElementsByTagName("li");
+                    for (i = 0; i < li.length; i++) {
+                        a = li[i].getElementsByTagName("a")[0];
+                        console.log(a.innerText);
+                        console.log(a.textContent);
+                        console.log(a.dataset.ru);
+                        txtValue = a.textContent || a.innerText || a.dataset.ru;
+                        txtValue_ru = a.dataset.ru;
+                        if ((txtValue.toUpperCase().indexOf(filter) > -1) || (txtValue_ru && txtValue_ru.toUpperCase().indexOf(filter) > -1)) {
+                            li[i].style.display = "";
+                        } else {
+                            li[i].style.display = "none";
+                        }
+                    }
+                }
+            });
 
 
 
 
         })
     }
+
+    const myCodeInput = document.getElementById('my_code');
+    myCodeInput.addEventListener('keyup', (event) => {
+        console.log('keyup in mycoce');
+        console.log(event.target.value.length);
+        if(event.target.value.length >= 6) {
+            let remains_form_data = new FormData();
+            remains_form_data.append('code',event.target.value);
+            let telephone = document.getElementsByName('form_report_telephone');
+            if(telephone){
+                remains_form_data.append('telephone',telephone[0].value);
+                let response = fetch('https://iliili.top/coderemains', {
+                    method: 'POST',
+                    body: remains_form_data
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        console.log(result);
+                        if(result.error){
+                            document.getElementById('no_subscription').classList.add('show_subscription');
+                            document.getElementById('subscription').classList.remove('show_subscription');
+                        }
+                        if(result.remains){
+                            if(result.promotariff === 'true'){
+                                document.getElementById('no_subscription').classList.remove('show_subscription');
+                                document.getElementById('subscription').innerHTML="Промокод на кол-во отчетов: "+result.remains +". Cтоимость: "+result.promotariff_price;
+                                document.getElementById('subscription').classList.add('show_subscription');
+                            }
+                            else {
+                                document.getElementById('no_subscription').classList.remove('show_subscription');
+                                document.getElementById('subscription').innerHTML="Доступно отчетов: "+result.remains;
+                                document.getElementById('subscription').classList.add('show_subscription');
+                            }
+
+                        }
+                        else if(result.remains === 0){
+                            document.getElementById('no_subscription').classList.remove('show_subscription');
+                            document.getElementById('subscription').innerHTML="Доступно отчетов: "+result.remains;
+                            document.getElementById('subscription').classList.add('show_subscription');
+                        }
+
+
+                    });
+            }
+
+        }
+        else {
+            document.getElementById('subscription').classList.remove('show_subscription');
+            document.getElementById('no_subscription').classList.remove('show_subscription');
+        }
+    });
+
 
     const citySelectItems = document.querySelectorAll('.city_item');
     const cityVal = document.getElementById('cities_placeholder');
@@ -229,8 +360,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('people_wrapper').classList.add('s-none');
                 document.getElementById('people_add_wrapper').classList.add('s-none');
             }
+
+            document.querySelector('#calc > input[data-id="for_what"]').value = event.target.value;
+            setTimeout(() => {
+                sentRequest();
+            },200);
         }
-        document.querySelector('#calc > input[data-id="for_what"]').value = event.target.value;
+
     });
 
 
@@ -239,6 +375,7 @@ document.addEventListener('DOMContentLoaded', function () {
         citySelectItems.forEach((item) => {
             item.addEventListener('click',(event) => {
                 event.stopPropagation();
+                console.log('city clicked');
                 if(document.querySelector('#calc > input[name="city"]')){
                     document.querySelector('#calc > input[name="city"]').remove();
                 }
@@ -255,7 +392,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     let data = {
                         city_code: item.dataset.city
                     };
-                    let response = fetch('https://meter.sivpro.ru/getRegionsByCity', {
+                    let response = fetch('https://iliili.top/getRegionsByCity', {
                         method: 'POST',
                         body: JSON.stringify(data)
                     })
@@ -272,37 +409,72 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
 
-    document.getElementById('flat-budget').addEventListener('keyup',function(event) {
+
+    document.getElementById('flat-budget').addEventListener('blur',function(event) {
         console.log('Бюжет изменение:'+event.target.value);
-        document.querySelector('#calc > input[data-id="flat-budget"]').value = event.target.value;
+        document.querySelector('#calc > input[data-id="flat-budget"]').value = event.target.value.replace(/\s/g,'');
+        setTimeout(() => {
+            sentRequest();
+        },200);
     });
+
+    document.getElementById('flat-budget').addEventListener('keyup',function(event) {
+        let current_value = numberWithSpaces(event.target.value);
+        console.log(current_value);
+        this.value = current_value;
+    });
+
+
+
     document.getElementById('flat-aria').addEventListener('keyup',function(event) {
         console.log('Пощадь изменение:'+event.target.value);
         document.querySelector('#calc > input[data-id="flat-area"]').value = event.target.value;
+    });
+    document.getElementById('flat-aria').addEventListener('blur',function(event) {
+        console.log('Пощадь изменение:'+event.target.value);
+        document.querySelector('#calc > input[data-id="flat-area"]').value = event.target.value;
+        setTimeout(() => {
+            sentRequest();
+        },200);
+
     });
 
     let class_flat_checkboxs = document.querySelectorAll('#class_flat_wrapper > label > .class_flat_button');
     class_flat_checkboxs.forEach((item) => {
         item.addEventListener('change', function() {
+            let checked;
             if (this.checked) {
                 console.log("Checkbox is checked.."+this.id);
-                document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = true;
+                checked = true;
             } else {
                 console.log("Checkbox is not checked..");
-                document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = false;
+                checked = false;
             }
+
+            document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = checked;
+            setTimeout(() => {
+                console.log('start request..');
+                sentRequest();
+            },200);
         });
-    })
+    });
+
     let type_flat_checkboxs = document.querySelectorAll('#type_flat_wrapper > label > .type_flat_button');
     type_flat_checkboxs.forEach((item) => {
         item.addEventListener('change', function() {
+            let checked;
             if (this.checked) {
                 console.log("Checkbox is checked.."+this.id);
-                document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = true;
+                checked = true;
             } else {
                 console.log("Checkbox is not checked..");
-                document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = false;
+                checked = false;
             }
+            document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = checked;
+            setTimeout(() => {
+                console.log('start request..');
+                sentRequest();
+            },200);
         });
     })
     let important_flat_checkboxs = document.querySelectorAll('#important_wrapper > label > .important_for_flat');
@@ -317,6 +489,18 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     })
+
+    let plus_minute_people = document.querySelectorAll('.quantity__number');
+    plus_minute_people.forEach((item) => {
+        item.addEventListener('change', function() {
+            setTimeout(() => {
+                console.log('start request..');
+                sentRequest();
+            },200);
+        })
+    });
+
+
 
     /*
     let report_needs = document.querySelectorAll('#report_needs > label');
@@ -334,10 +518,15 @@ document.addEventListener('DOMContentLoaded', function () {
         if (this.checked) {
             console.log("Checkbox dog is checked.."+this.id);
             document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = true;
+            //Включаем в отчет
+            //dispatchEvent(new Event('click')
         } else {
             console.log("Checkbox dog is not checked..");
             document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = false;
+            //Исключаем из отчета
+            //dispatchEvent(new Event('click')
         }
+        sentRequest();
     });
 
     //Важно метро
@@ -350,6 +539,10 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("Checkbox dog is not checked..");
             document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = false;
         }
+        setTimeout(() => {
+            console.log('start request..');
+            sentRequest();
+        },200);
     });
 
     //Важна отделка
@@ -362,7 +555,12 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("Checkbox dog is not checked..");
             document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = false;
         }
+        setTimeout(() => {
+            console.log('start request..');
+            sentRequest();
+        },200);
     })
+
 
     //Важна парковка
     let important_parking = document.getElementById('important_parking');
@@ -374,7 +572,13 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("Checkbox dog is not checked..");
             document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = false;
         }
-    })
+        setTimeout(() => {
+            console.log('start request..');
+            sentRequest();
+        },200);
+
+    });
+
 
     //исключить|добавить из отчета
     const report_no_needs_block = document.getElementById('report_no_needs');
@@ -385,8 +589,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     need_to_report.forEach((item)=> {
         item.addEventListener('change', function(e) {
-            //e.stopPropagation();
-            //report_no_needs_block.appendChild(item);
             let parent_node_id = e.target.parentNode.parentNode.id;
             console.log('Исключи|включить в отчет ' + parent_node_id);
             if(parent_node_id === 'report_no_needs') {
@@ -418,6 +620,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 }
                 if(!current_element) {
+                    objectManager.objects.setObjectOptions(event.target.dataset.region, {iconImageHref: '/img/dist/icon-mark_selected.svg'});
                     let jk = '<label for="apartment-checkbox-01" class="btn-checkbox projects__checkbox" data-id="'+event.target.dataset.region+'" data-name="'+event.target.innerHTML+'">\n' +
                         '                        <input type="checkbox" class="btn-checkbox__input" id="apartment-checkbox-01"  checked>\n' +
                         '                        <span class="btn-checkbox__label" data-id="jk_' + event.target.dataset.region + '">' + event.target.innerHTML + '</span>\n' +
@@ -449,6 +652,7 @@ document.addEventListener('DOMContentLoaded', function () {
         event.target.parentNode.remove();
         event.target.remove();
         //sentRequest();
+        objectManager.objects.setObjectOptions(event.target.dataset.id.replace('jk_',''), {iconImageHref: '/img/dist/icon-mark.svg'});
     });
 
 
@@ -475,7 +679,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 '                    </label>';
 
             selected_jk.insertAdjacentHTML('beforeend', jk);
-            calc.insertAdjacentHTML('beforeend', '<input type="hidden" name="jks[]" value="' + item.dataset.id + '" data-id="jk_' + item.dataset.id + '"/>')
+            calc.insertAdjacentHTML('beforeend', '<input type="hidden" name="jks[]" value="' + item.dataset.id + '" data-id="jk_' + item.dataset.id + '"/>');
+            objectManager.objects.setObjectOptions(item.dataset.id, {iconImageHref: '/img/dist/icon-mark_selected.svg'});
 
         });
     })
@@ -489,11 +694,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let regionWrapper = document.getElementById('region_wrapper');
     regionWrapper.addEventListener('click',(event) => {
-        console.log(event.target.className);
+        //console.log(event.target.className);
         event.preventDefault();
         if ( event.target.className === 'input-dropdown__link region_item') {
-            console.log('clicked on region item');
-            regionVal.placeholder = event.target.innerHTML;
+           // console.log('clicked on region item');
+           //regionVal.placeholder = event.target.innerHTML;
 
             let current_element = document.querySelector('[data-id="region_'+event.target.innerHTML+'"]');
             if(!current_element) {
@@ -516,16 +721,11 @@ document.addEventListener('DOMContentLoaded', function () {
     regions_buttons.addEventListener('click',(event) => {
 
             event.stopPropagation();
-            console.log('click to delete region button');
-
-            console.log('target:');
-            console.log(event.target);
             let current_dataset = event.target.dataset.id;
-            console.log('currnet_dataset='+current_dataset);
-            console.log('#calc > input[data-id="'+current_dataset+'"]');
             document.querySelector('#calc > input[data-id="'+current_dataset+'"]').remove();
             event.target.parentNode.remove();
             event.target.remove();
+
         sentRequest();
     })
 
@@ -533,37 +733,64 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function sentRequest()
     {
-        //let available_projects_list = document.getElementById('available_projects_list');
+        document.querySelectorAll('#calc > input[name="jks[]"]').forEach((item)=>{item.remove()});
+        selected_jk.innerHTML='';
         available_projects_list.innerHTML = "";
-
+        document.querySelectorAll('#calc > input[name="report_includes[]"]').forEach(e => e.remove());
+        //document.querySelectorAll('.report_need_include').forEach(e => e.remove());
         let form = document.getElementById('calc');
-        let response = fetch('https://meter.sivpro.ru/reqtest', {
+        let response = fetch('https://iliili.top/reqtest', {
             method: 'POST',
             body: new FormData(form)
         })
             .then(response => response.json())
             .then(result => {
                 //let counts = Object.entries(result);
-                console.log(result)
+
                 let houses = [];
                 result.items.forEach((item) => {
                     //console.log({'name': item.name, 'coords': item.coordinates});
                     houses.push({'name': item.name, 'coords': item.coordinates});
                     available_projects_list.insertAdjacentHTML('beforeend', '<li class="input-dropdown__item available_project" data-id="'+item.code+'" data-name="'+item.name+'">'+
-                        '<a href="#" class="input-dropdown__link region_item available_project" data-region="'+item.code+'">'+item.name+'</a> </li>');
-                })
-                    sessionStorage.setItem('yacoords', JSON.stringify(result));
-                    document.getElementById('total').innerHTML = result.items.length;
-                    total_wrapper.style.setProperty('display','block');
-                    if(result.items.length > 0){
+                        '<a href="#" class="input-dropdown__link region_item available_project" data-region="'+item.code+'" data-ru="'+item.ru_name+'">'+item.name+'</a> </li>');
+                });
+
+                if(result.res.included) {
+                    result.res.included.forEach((item) => {
+                        calc.insertAdjacentHTML('beforeend', '<input type="text" class name="report_includes[]" value="' + item.name + '"  />');
+                        let current_element = report_no_needs_block.querySelector('[data-value = "' + item.name + '"]');
+                        if (current_element) {
+                            console.log('Включаю нужно из ненужных=' + item.name);
+                            current_element.checked = true;
+                            report_needs_block.appendChild(current_element.parentNode);
+                        }
+
+                    });
+                }
+                if(result.res.excluded) {
+                        result.res.excluded.forEach((item) => {
+                            let current_element = report_needs_block.querySelector('[data-value = "' + item.name + '"]');
+                            if (current_element) {
+                                console.log('Выключаю ненужное из нужных=' + item.name);
+                                current_element.checked = false;
+                                report_no_needs_block.appendChild(current_element.parentNode);
+                            }
+
+                        });
+                    }
+
+                sessionStorage.setItem('yacoords', JSON.stringify(result));
+                document.getElementById('total').innerHTML = result.items.length;
+                total_wrapper.style.setProperty('display','block');
+                if(result.items.length > 0){
                         get_projects_button.style.setProperty('display','inline-block');
                     }
-                    else {
+                else {
                         get_projects_button.style.setProperty('display','none');
                     }
 
-                    objectManager.removeAll();
-                    objectManager.add(result.map);
+                objectManager.removeAll();
+                objectManager.add(result.map);
 
 
 
@@ -577,16 +804,81 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
 
+    /*send Form*/
+    let sendForm = document.getElementById('request_report');
+    sendForm.addEventListener('submit', function(event){
+        console.log('submit form');
+        event.preventDefault();
+        sendToReport();
+    });
+
+    function sendToReport()
+    {
+        let form_calc = document.getElementById('calc');
+        let form_request = document.getElementById('request_report');
+
+        let formData = new FormData(form_request);
+        let calcData = new FormData(form_calc);
+
+        for (var pair of calcData.entries()) {
+            formData.append(pair[0], pair[1]);
+        }
+
+        let response = fetch('https://iliili.top/reqreport', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(result => {
+                console.log(result);
+                if(result.success === 'ok') {
+                    if(result.redirect){
+                        window.location.assign(result.redirect);
+                    }
+                    else {
+                        document.getElementById('order').classList.remove('modal--active')
+                        document.getElementById('success').classList.add('modal--active')
+                    }
+
+                }
+                if(result.error) {
+                    alert(result.redirect);
+                }
+            })
+
+    }
+
     // MODAL
     const modalBtn = document.querySelectorAll('.modal-btn')
     const modal = document.querySelectorAll('.modal')
     const modalClose = document.querySelectorAll('.modal__close')
+    const modalBtnClose = document.querySelectorAll('.modal__btn_close');
     const overlay = document.querySelector('.overlay')
-    
+    const tariffs = document.querySelectorAll('.tariff-code');
+    const promo_block = document.querySelector('.promo_block');
+
+    /*
+    document.getElementById('payment-success').classList.add('modal--active');
+    if (!overlay.classList.contains('overlay--active')) {
+        overlay.classList.add('overlay--active');
+    }
+
+     */
+
+
     if (modalBtn) {
         modalBtn.forEach((item) => {
             item.addEventListener('click', (event) => {
                 event.preventDefault();
+
+                //Если это кнопка выбора проектов, то надо проверить, что выбраны минимум 1 проект
+                if(item.id==='get_projects_button'){
+                    let jks = document.getElementsByName('jks[]');
+                    if(jks.length <= 0) {
+                        alert('Чтобы сравнить - выберите от 1 до 3 проектов.');
+                        return false;
+                    }
+                }
 
                 const modalID = item.dataset.id
 
@@ -596,12 +888,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
     
                     document.querySelectorAll('.modal.modal--active').forEach((child) => child.classList.remove('modal--active'))
-                    document.body.classList.add('scroll-disabled')
+                    //document.body.classList.add('scroll-disabled')
                     document.getElementById(modalID).classList.add('modal--active')
 
                     if (document.getElementById(modalID).classList.contains('modal--sm')) {
                         setTimeout(() => {
-                            document.body.classList.remove('scroll-disabled')
+                            //document.body.classList.remove('scroll-disabled')
                             document.querySelectorAll('.modal.modal--active').forEach((child) => child.classList.remove('modal--active'))
                             overlay.classList.remove('overlay--active')
                         }, 5000)
@@ -611,12 +903,25 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    if(tariffs) {
+        tariffs.forEach((item)=>{
+            item.addEventListener('change', (event)=>{
+                if(item.classList.contains('show-code')) {
+                    promo_block.classList.add('show_promo_block');
+                }
+                else {
+                    promo_block.classList.remove('show_promo_block');
+                }
+            });
+        })
+    }
+
     document.body.addEventListener('keyup', (event) => {
         let key = event.keyCode;
 
         if (key == 27) {
             if (overlay.classList.contains('overlay--active')) {
-                document.body.classList.remove('scroll-disabled')
+                //document.body.classList.remove('scroll-disabled')
                 document.querySelectorAll('.modal.modal--active').forEach((child) => child.classList.remove('modal--active'))
                 overlay.classList.remove('overlay--active')
             }
@@ -626,8 +931,26 @@ document.addEventListener('DOMContentLoaded', function () {
     if (modalClose) {
         modalClose.forEach((item) => {
             item.addEventListener('click', () => {
+                console.log('close click');
+                console.log(overlay);
                 if (overlay.classList.contains('overlay--active')) {
-                    document.body.classList.remove('scroll-disabled')
+                    console.log('overlay contains overla--active');
+                    //document.body.classList.remove('scroll-disabled')
+                    document.querySelectorAll('.modal.modal--active').forEach((child) => child.classList.remove('modal--active'))
+                    overlay.classList.remove('overlay--active')
+                }
+            });
+        });
+    }
+
+    if(modalBtnClose){
+        modalBtnClose.forEach((item) => {
+            item.addEventListener('click', () => {
+                console.log('close click');
+                console.log(overlay);
+                if (overlay.classList.contains('overlay--active')) {
+                    console.log('overlay contains overla--active');
+                    //document.body.classList.remove('scroll-disabled')
                     document.querySelectorAll('.modal.modal--active').forEach((child) => child.classList.remove('modal--active'))
                     overlay.classList.remove('overlay--active')
                 }
@@ -638,49 +961,44 @@ document.addEventListener('DOMContentLoaded', function () {
     if (overlay) {
         overlay.addEventListener('click', () => {
             if (overlay.classList.contains('overlay--active')) {
-                document.body.classList.remove('scroll-disabled')
+                //document.body.classList.remove('scroll-disabled')
                 document.querySelectorAll('.modal.modal--active').forEach((child) => child.classList.remove('modal--active'))
                 overlay.classList.remove('overlay--active')
             }
         });
     }
 
-    /*
-    let map = document.getElementById('YMapsID');
-    if(map.length > 0) {
-        var myMap;
-        ymaps.ready(function () {
-            myMap = new ymaps.Map('YMapsID', {
-                center: [55.751574, 37.573856],
-                zoom: 9
-            }),
 
-                // Создаём макет содержимого.
-                MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
-                    `<div style="color: #FFFFFF; font-weight: bold;">
-                    $[properties.iconContent]
-                    Magnolia Park
-                    Ромашка Девелопмент 3Q 2023 г.
 
-                    квартиры премиум класс
-                    Студии от 5 890 000 р.
-                    1-комн. от 7 236 000 р.
-                </div>`
-                )
 
-            objectManager = new ymaps.ObjectManager({
-                // Чтобы метки начали кластеризоваться, выставляем опцию.
-                clusterize: true,
-                // ObjectManager принимает те же опции, что и кластеризатор.
-                gridSize: 32,
-                clusterDisableClickZoom: true
-            });
-            objectManager.objects.options.set('preset', 'islands#greenDotIcon');
-            objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
-            myMap.geoObjects.add(objectManager);
-            //getDataForMap();
-        });
+    /*click moscow*/
+    //citySelectItems[0].click();
+    //input-dropdown__link city_item
+    let cities =  document.querySelectorAll('.input-dropdown__link.city_item')
+    if(cities.length > 0) {
+        setTimeout(function () {
+            cities[0].click();
+        },500);
+
     }
-    */
+
+
+
+    let payment_result = GetURLParameter('payment');
+    console.log('payment-result='+payment_result);
+    if(payment_result){
+        if(payment_result === 'success'){
+            document.getElementById('payment-success').classList.add('modal--active');
+            if (!overlay.classList.contains('overlay--active')) {
+                overlay.classList.add('overlay--active');
+            }
+        }
+        if(payment_result === 'failure') {
+            document.getElementById('payment-failure').classList.add('modal--active');
+            if (!overlay.classList.contains('overlay--active')) {
+                overlay.classList.add('overlay--active');
+            }
+        }
+    }
 
 });
