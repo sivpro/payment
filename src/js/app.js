@@ -1,4 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+
+
+})
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const domain = document.head.querySelector("meta[name='domain']").getAttribute('content');
     // INPUTMASK
     Inputmask().mask(document.querySelectorAll('input'));
 
@@ -32,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         return number;
     }
-
     
     // SMOOTH SCROLL
     function currentYPosition() {
@@ -288,55 +297,54 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const myCodeInput = document.getElementById('my_code');
-    myCodeInput.addEventListener('keyup', (event) => {
-        console.log('keyup in mycoce');
-        console.log(event.target.value.length);
-        if(event.target.value.length >= 6) {
-            let remains_form_data = new FormData();
-            remains_form_data.append('code',event.target.value);
-            let telephone = document.getElementsByName('form_report_telephone');
-            if(telephone){
-                remains_form_data.append('telephone',telephone[0].value);
-                let response = fetch('https://iliili.top/coderemains', {
-                    method: 'POST',
-                    body: remains_form_data
-                })
-                    .then(response => response.json())
-                    .then(result => {
-                        console.log(result);
-                        if(result.error){
-                            document.getElementById('no_subscription').classList.add('show_subscription');
-                            document.getElementById('subscription').classList.remove('show_subscription');
-                        }
-                        if(result.remains){
-                            if(result.promotariff === 'true'){
+    if(myCodeInput) {
+        myCodeInput.addEventListener('keyup', (event) => {
+            console.log('keyup in mycoce');
+            console.log(event.target.value.length);
+            if (event.target.value.length >= 6) {
+                let remains_form_data = new FormData();
+                remains_form_data.append('code', event.target.value);
+                let telephone = document.getElementsByName('form_report_telephone');
+                if (telephone) {
+                    remains_form_data.append('telephone', telephone[0].value);
+                    let response = fetch(domain + '/coderemains', {
+                        method: 'POST',
+                        body: remains_form_data
+                    })
+                        .then(response => response.json())
+                        .then(result => {
+                            console.log(result);
+                            if (result.error) {
+                                document.getElementById('no_subscription').classList.add('show_subscription');
+                                document.getElementById('subscription').classList.remove('show_subscription');
+                            }
+                            if (result.remains) {
+                                if (result.promotariff === 'true') {
+                                    document.getElementById('no_subscription').classList.remove('show_subscription');
+                                    document.getElementById('subscription').innerHTML = "Промокод на кол-во отчетов: " + result.remains + ". Cтоимость: " + result.promotariff_price;
+                                    document.getElementById('subscription').classList.add('show_subscription');
+                                } else {
+                                    document.getElementById('no_subscription').classList.remove('show_subscription');
+                                    document.getElementById('subscription').innerHTML = "Доступно отчетов: " + result.remains;
+                                    document.getElementById('subscription').classList.add('show_subscription');
+                                }
+
+                            } else if (result.remains === 0) {
                                 document.getElementById('no_subscription').classList.remove('show_subscription');
-                                document.getElementById('subscription').innerHTML="Промокод на кол-во отчетов: "+result.remains +". Cтоимость: "+result.promotariff_price;
+                                document.getElementById('subscription').innerHTML = "Доступно отчетов: " + result.remains;
                                 document.getElementById('subscription').classList.add('show_subscription');
                             }
-                            else {
-                                document.getElementById('no_subscription').classList.remove('show_subscription');
-                                document.getElementById('subscription').innerHTML="Доступно отчетов: "+result.remains;
-                                document.getElementById('subscription').classList.add('show_subscription');
-                            }
-
-                        }
-                        else if(result.remains === 0){
-                            document.getElementById('no_subscription').classList.remove('show_subscription');
-                            document.getElementById('subscription').innerHTML="Доступно отчетов: "+result.remains;
-                            document.getElementById('subscription').classList.add('show_subscription');
-                        }
 
 
-                    });
+                        });
+                }
+
+            } else {
+                document.getElementById('subscription').classList.remove('show_subscription');
+                document.getElementById('no_subscription').classList.remove('show_subscription');
             }
-
-        }
-        else {
-            document.getElementById('subscription').classList.remove('show_subscription');
-            document.getElementById('no_subscription').classList.remove('show_subscription');
-        }
-    });
+        });
+    }
 
 
     const citySelectItems = document.querySelectorAll('.city_item');
@@ -345,31 +353,33 @@ document.addEventListener('DOMContentLoaded', function () {
     const regionVal = document.getElementById('regions_placeholder');
     const regions_buttons = document.getElementById('regions_buttons');
     const selected_jk = document.getElementById('selected_jk');
+    const selected_jks = document.querySelectorAll('.selected_jk');
 
     const calc = document.getElementById('calc');
 
     /*для чего*/
-    document.getElementById('for_what_wrapper').addEventListener('click', function (event) {
-        if ( event.target && event.target.matches("input[type='radio']") ) {
-            console.log('Щёлк на для чего '+event.target.value);
-            if(event.target.value === 'for_home') {
-                document.getElementById('people_wrapper').classList.remove('s-none');
-                document.getElementById('people_add_wrapper').classList.remove('s-none');
+    let for_what = document.getElementById('for_what_wrapper');
+    if(for_what){
+        for_what.addEventListener('click', function (event) {
+            if ( event.target && event.target.matches("input[type='radio']") ) {
+                console.log('Щёлк на для чего '+event.target.value);
+                if(event.target.value === 'for_home') {
+                    document.getElementById('people_wrapper').classList.remove('s-none');
+                    document.getElementById('people_add_wrapper').classList.remove('s-none');
+                }
+                else {
+                    document.getElementById('people_wrapper').classList.add('s-none');
+                    document.getElementById('people_add_wrapper').classList.add('s-none');
+                }
+
+                document.querySelector('#calc > input[data-id="for_what"]').value = event.target.value;
+                setTimeout(() => {
+                    sentRequest();
+                },200);
             }
-            else {
-                document.getElementById('people_wrapper').classList.add('s-none');
-                document.getElementById('people_add_wrapper').classList.add('s-none');
-            }
 
-            document.querySelector('#calc > input[data-id="for_what"]').value = event.target.value;
-            setTimeout(() => {
-                sentRequest();
-            },200);
-        }
-
-    });
-
-
+        });
+    }
 
     if(citySelectItems) {
         citySelectItems.forEach((item) => {
@@ -392,7 +402,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     let data = {
                         city_code: item.dataset.city
                     };
-                    let response = fetch('https://iliili.top/getRegionsByCity', {
+                    let response = fetch(domain+'/getRegionsByCity', {
                         method: 'POST',
                         body: JSON.stringify(data)
                     })
@@ -409,281 +419,306 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
 
+    let flat_budget = document.getElementById('flat-budget');
+    if(flat_budget){
+        flat_budget.addEventListener('blur',function(event) {
+            console.log('Бюжет изменение:'+event.target.value);
+            document.querySelector('#calc > input[data-id="flat-budget"]').value = event.target.value.replace(/\s/g,'');
+            setTimeout(() => {
+                sentRequest();
+            },200);
+        });
 
-    document.getElementById('flat-budget').addEventListener('blur',function(event) {
-        console.log('Бюжет изменение:'+event.target.value);
-        document.querySelector('#calc > input[data-id="flat-budget"]').value = event.target.value.replace(/\s/g,'');
-        setTimeout(() => {
-            sentRequest();
-        },200);
-    });
-
-    document.getElementById('flat-budget').addEventListener('keyup',function(event) {
-        let current_value = numberWithSpaces(event.target.value);
-        console.log(current_value);
-        this.value = current_value;
-    });
+        flat_budget.addEventListener('keyup',function(event) {
+            let current_value = numberWithSpaces(event.target.value);
+            console.log(current_value);
+            this.value = current_value;
+        });
+    }
 
 
+    let flat_aria = document.getElementById('flat-aria');
+    if(flat_aria){
+        flat_aria.addEventListener('keyup',function(event) {
+            console.log('Пощадь изменение:'+event.target.value);
+            document.querySelector('#calc > input[data-id="flat-area"]').value = event.target.value;
+        });
+        flat_aria.addEventListener('blur',function(event) {
+            console.log('Пощадь изменение:'+event.target.value);
+            document.querySelector('#calc > input[data-id="flat-area"]').value = event.target.value;
+            setTimeout(() => {
+                sentRequest();
+            },200);
 
-    document.getElementById('flat-aria').addEventListener('keyup',function(event) {
-        console.log('Пощадь изменение:'+event.target.value);
-        document.querySelector('#calc > input[data-id="flat-area"]').value = event.target.value;
-    });
-    document.getElementById('flat-aria').addEventListener('blur',function(event) {
-        console.log('Пощадь изменение:'+event.target.value);
-        document.querySelector('#calc > input[data-id="flat-area"]').value = event.target.value;
-        setTimeout(() => {
-            sentRequest();
-        },200);
+        });
+    }
 
-    });
 
     let class_flat_checkboxs = document.querySelectorAll('#class_flat_wrapper > label > .class_flat_button');
-    class_flat_checkboxs.forEach((item) => {
-        item.addEventListener('change', function() {
-            let checked;
-            if (this.checked) {
-                console.log("Checkbox is checked.."+this.id);
-                checked = true;
-            } else {
-                console.log("Checkbox is not checked..");
-                checked = false;
-            }
+    if(class_flat_checkboxs){
+        class_flat_checkboxs.forEach((item) => {
+            item.addEventListener('change', function() {
+                let checked;
+                if (this.checked) {
+                    console.log("Checkbox is checked.."+this.id);
+                    checked = true;
+                } else {
+                    console.log("Checkbox is not checked..");
+                    checked = false;
+                }
 
-            document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = checked;
-            setTimeout(() => {
-                console.log('start request..');
-                sentRequest();
-            },200);
+                document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = checked;
+                setTimeout(() => {
+                    console.log('start request..');
+                    sentRequest();
+                },200);
+            });
         });
-    });
+    }
 
     let type_flat_checkboxs = document.querySelectorAll('#type_flat_wrapper > label > .type_flat_button');
-    type_flat_checkboxs.forEach((item) => {
-        item.addEventListener('change', function() {
-            let checked;
-            if (this.checked) {
-                console.log("Checkbox is checked.."+this.id);
-                checked = true;
-            } else {
-                console.log("Checkbox is not checked..");
-                checked = false;
-            }
-            document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = checked;
-            setTimeout(() => {
-                console.log('start request..');
-                sentRequest();
-            },200);
-        });
-    })
+    if(type_flat_checkboxs){
+        type_flat_checkboxs.forEach((item) => {
+            item.addEventListener('change', function() {
+                let checked;
+                if (this.checked) {
+                    console.log("Checkbox is checked.."+this.id);
+                    checked = true;
+                } else {
+                    console.log("Checkbox is not checked..");
+                    checked = false;
+                }
+                document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = checked;
+                setTimeout(() => {
+                    console.log('start request..');
+                    sentRequest();
+                },200);
+            });
+        })
+    }
+
     let important_flat_checkboxs = document.querySelectorAll('#important_wrapper > label > .important_for_flat');
-    important_flat_checkboxs.forEach((item) => {
-        item.addEventListener('change', function() {
-            if (this.checked) {
-                console.log("Checkbox is checked.."+this.id);
-                document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = true;
-            } else {
-                console.log("Checkbox is not checked..");
-                document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = false;
-            }
-        });
-    })
+    if(important_flat_checkboxs){
+        important_flat_checkboxs.forEach((item) => {
+            item.addEventListener('change', function() {
+                if (this.checked) {
+                    console.log("Checkbox is checked.."+this.id);
+                    document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = true;
+                } else {
+                    console.log("Checkbox is not checked..");
+                    document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = false;
+                }
+            });
+        })
+    }
+
 
     let plus_minute_people = document.querySelectorAll('.quantity__number');
-    plus_minute_people.forEach((item) => {
-        item.addEventListener('change', function() {
-            setTimeout(() => {
-                console.log('start request..');
-                sentRequest();
-            },200);
-        })
-    });
+    if(plus_minute_people){
+        plus_minute_people.forEach((item) => {
+            item.addEventListener('change', function() {
+                setTimeout(() => {
+                    console.log('start request..');
+                    sentRequest();
+                },200);
+            })
+        });
+    }
 
-
-
-    /*
-    let report_needs = document.querySelectorAll('#report_needs > label');
-    let report_no_needs = document.querySelectorAll('#report_no_needs > label');
-    report_needs.forEach((item) => {
-        item.addEventListener('click', function (event) {
-            //console.log('click on report need element');
-        })
-    });
-
-     */
 
     let need_dog = document.getElementById('flat_for_dog');
-    need_dog.addEventListener('change', function() {
-        if (this.checked) {
-            console.log("Checkbox dog is checked.."+this.id);
-            document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = true;
-            //Включаем в отчет
-            //dispatchEvent(new Event('click')
-        } else {
-            console.log("Checkbox dog is not checked..");
-            document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = false;
-            //Исключаем из отчета
-            //dispatchEvent(new Event('click')
-        }
-        sentRequest();
-    });
+    if(need_dog){
+        need_dog.addEventListener('change', function() {
+            if (this.checked) {
+                console.log("Checkbox dog is checked.."+this.id);
+                document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = true;
+                //Включаем в отчет
+                //dispatchEvent(new Event('click')
+            } else {
+                console.log("Checkbox dog is not checked..");
+                document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = false;
+                //Исключаем из отчета
+                //dispatchEvent(new Event('click')
+            }
+            sentRequest();
+        });
+    }
 
     //Важно метро
     let important_metro = document.getElementById('important_metro');
-    important_metro.addEventListener('change',function(event) {
-        if (this.checked) {
-            console.log("Checkbox dog is checked.."+this.id);
-            document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = true;
-        } else {
-            console.log("Checkbox dog is not checked..");
-            document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = false;
-        }
-        setTimeout(() => {
-            console.log('start request..');
-            sentRequest();
-        },200);
-    });
+    if(important_metro){
+        important_metro.addEventListener('change',function(event) {
+            if (this.checked) {
+                console.log("Checkbox dog is checked.."+this.id);
+                document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = true;
+            } else {
+                console.log("Checkbox dog is not checked..");
+                document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = false;
+            }
+            setTimeout(() => {
+                console.log('start request..');
+                sentRequest();
+            },200);
+        });
+    }
 
     //Важна отделка
     let important_finish = document.getElementById('important_finish');
-    important_finish.addEventListener('change',function(event) {
-        if (this.checked) {
-            console.log("Checkbox dog is checked.."+this.id);
-            document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = true;
-        } else {
-            console.log("Checkbox dog is not checked..");
-            document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = false;
-        }
-        setTimeout(() => {
-            console.log('start request..');
-            sentRequest();
-        },200);
-    })
-
+    if(important_finish){
+        important_finish.addEventListener('change',function(event) {
+            if (this.checked) {
+                console.log("Checkbox dog is checked.."+this.id);
+                document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = true;
+            } else {
+                console.log("Checkbox dog is not checked..");
+                document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = false;
+            }
+            setTimeout(() => {
+                console.log('start request..');
+                sentRequest();
+            },200);
+        })
+    }
 
     //Важна парковка
     let important_parking = document.getElementById('important_parking');
-    important_parking.addEventListener('change',function(event) {
-        if (this.checked) {
-            console.log("Checkbox dog is checked.."+this.id);
-            document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = true;
-        } else {
-            console.log("Checkbox dog is not checked..");
-            document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = false;
-        }
-        setTimeout(() => {
-            console.log('start request..');
-            sentRequest();
-        },200);
+    if(important_parking){
+        important_parking.addEventListener('change',function(event) {
+            if (this.checked) {
+                console.log("Checkbox dog is checked.."+this.id);
+                document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = true;
+            } else {
+                console.log("Checkbox dog is not checked..");
+                document.querySelector('#calc > input[data-id="'+this.id+'"]').checked = false;
+            }
+            setTimeout(() => {
+                console.log('start request..');
+                sentRequest();
+            },200);
 
-    });
-
+        });
+    }
 
     //исключить|добавить из отчета
     const report_no_needs_block = document.getElementById('report_no_needs');
     const report_needs_block = document.getElementById('report_needs');
     const need_to_report = document.querySelectorAll('.report_need_include');
-    // const available_projects_list_items = document.querySelectorAll('.available_project');
-    const available_projects_list = document.getElementById('available_projects_list')
-
-    need_to_report.forEach((item)=> {
-        item.addEventListener('change', function(e) {
-            let parent_node_id = e.target.parentNode.parentNode.id;
-            console.log('Исключи|включить в отчет ' + parent_node_id);
-            if(parent_node_id === 'report_no_needs') {
-                console.log('Перемещаем в блок включить в отчет');
-                report_needs_block.appendChild(item);
-                calc.insertAdjacentHTML('beforeend','<input type="text" class name="report_includes[]" value="'+e.target.dataset.value+'"  />')
-
-            }
-            else if(parent_node_id === 'report_needs') {
-                console.log('Перемещаем в блок исключить из отчета ')
-                report_no_needs_block.appendChild(item);
-                document.querySelector('#calc > input[value="'+e.target.dataset.value+'"]').remove();
+    const available_projects_list = document.getElementById('available_projects_list');
 
 
-            }
+    if(need_to_report){
+        need_to_report.forEach((item)=> {
+            item.addEventListener('change', function(e) {
+                let parent_node_id = e.target.parentNode.parentNode.id;
+                console.log('Исключи|включить в отчет ' + parent_node_id);
+                if(parent_node_id === 'report_no_needs') {
+                    console.log('Перемещаем в блок включить в отчет');
+                    report_needs_block.appendChild(item);
+                    calc.insertAdjacentHTML('beforeend','<input type="text" class name="report_includes[]" value="'+e.target.dataset.value+'"  />')
+
+                }
+                else if(parent_node_id === 'report_needs') {
+                    console.log('Перемещаем в блок исключить из отчета ')
+                    report_no_needs_block.appendChild(item);
+                    document.querySelector('#calc > input[value="'+e.target.dataset.value+'"]').remove();
+
+
+                }
+            });
         });
-    });
+    }
 
-    available_projects_list.addEventListener('click',function(event) {
+    if(available_projects_list){
+        available_projects_list.addEventListener('click',function(event) {
             event.preventDefault();
             if ( event.target.className === 'input-dropdown__link region_item available_project') {
 
-                let current_element = document.querySelector('[data-id="jk_'+event.target.dataset.region+'"]');
-                let already_selected_jks = document.querySelectorAll('#calc > input[name="jks[]"]');
-                if(already_selected_jks){
-                    if (already_selected_jks.length === 3){
-                        alert('Максимально только 3 ЖК');
-                        return true;
-                    }
-                }
-                if(!current_element) {
-                    objectManager.objects.setObjectOptions(event.target.dataset.region, {iconImageHref: '/img/dist/icon-mark_selected.svg'});
-                    let jk = '<label for="apartment-checkbox-01" class="btn-checkbox projects__checkbox" data-id="'+event.target.dataset.region+'" data-name="'+event.target.innerHTML+'">\n' +
-                        '                        <input type="checkbox" class="btn-checkbox__input" id="apartment-checkbox-01"  checked>\n' +
-                        '                        <span class="btn-checkbox__label" data-id="jk_' + event.target.dataset.region + '">' + event.target.innerHTML + '</span>\n' +
-                        '                        <span class="btn-checkbox__icon"></span>\n' +
-                        '                    </label>';
+                addJkSelect(event.target.innerHTML, event.target.dataset.region);
 
-                    selected_jk.insertAdjacentHTML('beforeend', jk);
-                    calc.insertAdjacentHTML('beforeend', '<input type="hidden" name="jks[]" value="' + event.target.dataset.region + '" data-id="jk_' + event.target.dataset.region + '"/>')
-                }
-                else {
-                    console.log('уже есть');
-                }
             }
-    });
-
-
-    selected_jk.addEventListener('click',(event) => {
-
-        event.stopPropagation();
-
-        console.log('target:');
-        console.log(event.target);
-
-        let current_dataset = event.target.dataset.id;
-        console.log('currnet_dataset='+current_dataset);
-        console.log('#calc > input[data-id="'+current_dataset+'"]');
-
-        document.querySelector('#calc > input[data-id="'+current_dataset+'"]').remove();
-        event.target.parentNode.remove();
-        event.target.remove();
-        //sentRequest();
-        objectManager.objects.setObjectOptions(event.target.dataset.id.replace('jk_',''), {iconImageHref: '/img/dist/icon-mark.svg'});
-    });
-
-
-    let by_raiting_button = document.getElementById('by_raiting_button');
-
-    by_raiting_button.addEventListener('click',function(event) {
-        //let items_by_rating = document.querySelectorAll('#available_projects_list > li:nth-child(-n+3)');
-        let items_by_rating = document.querySelectorAll('#available_projects_list > li:nth-child(-n+3)');
-        //Удаляем уже выбранные
-        selected_jk.innerHTML='';
-        document.querySelectorAll('#calc > input[name="jks[]"]').forEach((item)=>{item.remove()});
-
-        console.log('по рейтингу');
-        console.log(items_by_rating);
-        items_by_rating.forEach((item) => {
-            console.log()
-            console.log(item.dataset)
-            console.log(item.dataset.id)
-            console.log(item.dataset.name)
-            let jk = '<label for="apartment-checkbox-01" class="btn-checkbox projects__checkbox" data-id="'+item.dataset.id+'">\n' +
-                '                        <input type="checkbox" class="btn-checkbox__input" id="apartment-checkbox-01"  checked>\n' +
-                '                        <span class="btn-checkbox__label" data-id="jk_' + item.dataset.id + '">' + item.dataset.name + '</span>\n' +
-                '                        <span class="btn-checkbox__icon"></span>\n' +
-                '                    </label>';
-
-            selected_jk.insertAdjacentHTML('beforeend', jk);
-            calc.insertAdjacentHTML('beforeend', '<input type="hidden" name="jks[]" value="' + item.dataset.id + '" data-id="jk_' + item.dataset.id + '"/>');
-            objectManager.objects.setObjectOptions(item.dataset.id, {iconImageHref: '/img/dist/icon-mark_selected.svg'});
-
         });
-    })
+    }
+
+    /*
+    if(selected_jk) {
+        selected_jks.forEach((item)=>{
+            item.addEventListener('click',function(event){
+                console.log(event.target);
+                let current_dataset = event.target.dataset.id;
+                document.querySelector('#calc > input[data-id="' + current_dataset + '"]').remove();
+                event.target.parentNode.remove();
+                event.target.remove();
+                objectManager.objects.setObjectOptions(event.target.dataset.id.replace('jk_', ''), {iconImageHref: '/img/dist/icon-mark.svg'});
+            });
+        });
+    }
+     */
+
+    if(selected_jk){
+
+
+        selected_jk.addEventListener('click',(event) => {
+
+            event.stopPropagation();
+
+            console.log('target:');
+            console.log(event.target);
+            if(event.target.dataset.id) {
+                let current_dataset = event.target.dataset.id;
+                console.log('currnet_dataset=' + current_dataset);
+                console.log('#calc > input[data-id="' + current_dataset + '"]');
+
+                document.querySelector('#calc > input[data-id="' + current_dataset + '"]').remove();
+                event.target.parentNode.remove();
+                event.target.remove();
+                //sentRequest();
+                objectManager.objects.setObjectOptions(event.target.dataset.id.replace('jk_', ''), {iconImageHref: '/img/dist/icon-mark.svg'});
+            }
+            else {
+                return false;
+            }
+        });
+    }
+
+
+
+    let by_raiting_ckeckbox = document.getElementById('raiting-checkbox');
+
+    if(by_raiting_ckeckbox){
+        by_raiting_ckeckbox.addEventListener('change',function(event) {
+           if(event.target.checked === false){
+               document.querySelectorAll('#calc > input[name="jks[]"]').forEach((item)=>{item.remove()});
+               selected_jk.innerHTML='';
+           }
+           else {
+               let items_by_rating = document.querySelectorAll('#available_projects_list > li:nth-child(-n+3)');
+               //Удаляем уже выбранные
+               selected_jk.innerHTML='';
+               document.querySelectorAll('#calc > input[name="jks[]"]').forEach((item)=>{item.remove()});
+
+               console.log('по рейтингу');
+               console.log(items_by_rating);
+               items_by_rating.forEach((item) => {
+                   console.log()
+                   console.log(item.dataset)
+                   console.log(item.dataset.id)
+                   console.log(item.dataset.name)
+                   let jk = '<label for="apartment-checkbox_'+item.dataset.id+'" class="btn-checkbox projects__checkbox selected_jk" data-id="'+item.dataset.id+'">\n' +
+                       '                        <input type="checkbox" class="btn-checkbox__input" id="apartment-checkbox_'+item.dataset.id+'"  checked>\n' +
+                       '                        <span class="btn-checkbox__label" data-id="jk_' + item.dataset.id + '">' + item.dataset.name + '</span>\n' +
+                       '                        <span class="btn-checkbox__icon" data-id="jk_'+item.dataset.id+'"></span>\n' +
+                       '                    </label>';
+
+                   selected_jk.insertAdjacentHTML('beforeend', jk);
+                   calc.insertAdjacentHTML('beforeend', '<input type="hidden" name="jks[]" value="' + item.dataset.id + '" data-id="jk_' + item.dataset.id + '"/>');
+                   objectManager.objects.setObjectOptions(item.dataset.id, {iconImageHref: '/img/dist/icon-mark_selected.svg'});
+
+               });
+           }
+
+        })
+    }
+
 
 
 
@@ -693,41 +728,47 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     let regionWrapper = document.getElementById('region_wrapper');
-    regionWrapper.addEventListener('click',(event) => {
-        //console.log(event.target.className);
-        event.preventDefault();
-        if ( event.target.className === 'input-dropdown__link region_item') {
-           // console.log('clicked on region item');
-           //regionVal.placeholder = event.target.innerHTML;
+    if(regionWrapper){
+        regionWrapper.addEventListener('click',(event) => {
+            //console.log(event.target.className);
+            event.preventDefault();
+            if ( event.target.className === 'input-dropdown__link region_item') {
+                // console.log('clicked on region item');
+                //regionVal.placeholder = event.target.innerHTML;
 
-            let current_element = document.querySelector('[data-id="region_'+event.target.innerHTML+'"]');
-            if(!current_element) {
-                regions_buttons.insertAdjacentHTML('beforeend', '<label for="area-checkbox-01" class="btn-checkbox projects__checkbox" data-id="'+event.target.innerHTML+'" >\n' +
-                    '                            <input type="checkbox" checked="checked" class="btn-checkbox__input region_buttons">\n' +
-                    '                            <span class="btn-checkbox__label" data-id="region_' + event.target.innerHTML + '">' + event.target.innerHTML + '</span>\n' +
-                    '                            <span class="btn-checkbox__icon"></span>\n' +
-                    '                        </label>');
+                let current_element = document.querySelector('[data-id="region_'+event.target.innerHTML+'"]');
+                if(!current_element) {
+                    regions_buttons.insertAdjacentHTML('beforeend', '<label for="area-checkbox-01" class="btn-checkbox projects__checkbox" data-id="region_'+event.target.innerHTML+'" >\n' +
+                        '                            <input type="checkbox" checked="checked" class="btn-checkbox__input region_buttons">\n' +
+                        '                            <span class="btn-checkbox__label" data-id="region_' + event.target.innerHTML + '">' + event.target.innerHTML + '</span>\n' +
+                        '                            <span class="btn-checkbox__icon" data-id="region_'+event.target.innerHTML+'"></span>\n' +
+                        '                        </label>');
 
-                calc.insertAdjacentHTML('beforeend','<input type="hidden" name="region[]" value="'+event.target.innerHTML+'" data-id="region_' + event.target.innerHTML + '" />')
+                    calc.insertAdjacentHTML('beforeend','<input type="hidden" name="region[]" value="'+event.target.innerHTML+'" data-id="region_' + event.target.innerHTML + '" />')
+                }
+                else {
+                    console.log('уже есть');
+                }
+                sentRequest()
+
             }
-            else {
-                console.log('уже есть');
-            }
-            sentRequest()
+        },false)
+    }
 
-        }
-    },false)
-
-    regions_buttons.addEventListener('click',(event) => {
+    if(regions_buttons){
+        regions_buttons.addEventListener('click',(event) => {
 
             event.stopPropagation();
             let current_dataset = event.target.dataset.id;
+            console.log('current_region_to_delete: '+event.target.dataset.id);
             document.querySelector('#calc > input[data-id="'+current_dataset+'"]').remove();
             event.target.parentNode.remove();
             event.target.remove();
 
-        sentRequest();
-    })
+            sentRequest();
+        })
+    }
+
 
 
 
@@ -739,7 +780,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('#calc > input[name="report_includes[]"]').forEach(e => e.remove());
         //document.querySelectorAll('.report_need_include').forEach(e => e.remove());
         let form = document.getElementById('calc');
-        let response = fetch('https://iliili.top/reqtest', {
+        let response = fetch(domain+'/reqtest', {
             method: 'POST',
             body: new FormData(form)
         })
@@ -781,6 +822,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 sessionStorage.setItem('yacoords', JSON.stringify(result));
                 document.getElementById('total').innerHTML = result.items.length;
+                document.getElementById('total_panel').innerHTML = result.items.length;
                 total_wrapper.style.setProperty('display','block');
                 if(result.items.length > 0){
                         get_projects_button.style.setProperty('display','inline-block');
@@ -806,11 +848,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /*send Form*/
     let sendForm = document.getElementById('request_report');
-    sendForm.addEventListener('submit', function(event){
-        console.log('submit form');
-        event.preventDefault();
-        sendToReport();
-    });
+    if(sendForm){
+        sendForm.addEventListener('submit', function(event){
+            console.log('submit form');
+            event.preventDefault();
+            sendToReport();
+        });
+    }
+
 
     function sendToReport()
     {
@@ -824,7 +869,7 @@ document.addEventListener('DOMContentLoaded', function () {
             formData.append(pair[0], pair[1]);
         }
 
-        let response = fetch('https://iliili.top/reqreport', {
+        let response = fetch(domain+'/reqreport', {
             method: 'POST',
             body: formData
         })
@@ -1001,4 +1046,71 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    /*cookie bar*/
+    let cookie_modal = document.getElementById('modal_cookie');
+    let cookie_modal_close = document.getElementById('modal_cookie-close');
+    if(!sessionStorage.getItem('cookie_info_seen')) {
+        cookie_modal.classList.add('modal--active');
+    }
+    cookie_modal_close.addEventListener('click',function(event) {
+        event.preventDefault();
+        sessionStorage.setItem('cookie_info_seen',1);
+        cookie_modal.classList.remove('modal--active');
+    })
+
+
+
 });
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    let modal_count_get = document.getElementById('total_panel_button');
+    if(modal_count_get){
+        modal_count_get.addEventListener('click',function(e){
+            document.getElementById('modal_count').classList.add('modal-count__hide');
+        });
+    }
+
+    let modal_count = document.getElementById('modal_count');
+
+    let scroll_func = function(){
+        console.log(window.scrollY);
+        let count_button = document.getElementById('total_wrapper');
+        const top = count_button.scrollTop;
+
+        if(window.scrollY > 2100 && (window.scrollY < count_button.offsetTop-880)){
+            console.log('ONE');
+            modal_count.classList.remove('modal-count__hide');
+        }
+        else if(window.scrollY > count_button.offsetTop-880 ) {
+            console.log('TWO');
+            modal_count.classList.add('modal-count__hide');
+        }
+        else {
+            console.log('THREE');
+            modal_count.classList.add('modal-count__hide');
+        }
+    };
+
+    const debounce = (func, delay) => {
+        let debounceTimer
+        return function() {
+            const context = this
+            const args = arguments
+            clearTimeout(debounceTimer)
+            debounceTimer
+                = setTimeout(() => func.apply(context, args), delay)
+        }
+    }
+
+
+
+
+    window.addEventListener('scroll', debounce(function() {
+        scroll_func();
+    },10));
+});
+
+
+

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Расчёт</title>
+    <meta name="domain" content="https://meter.sivpro.ru">
     <!-- Styles -->
     <link rel="stylesheet" href="css/vendor.min.css">
     <link rel="stylesheet" href="css/app.min.css">
@@ -372,29 +373,39 @@
                     <h3 class="projects__title">Сравнить проекты</h3>
                     <span class="tooltip__icon" aria-label="Подсказка">?</span>
                     <div class="tooltip__wrapper">
-                        <p>Об исключительной важности электрического света для армии. Об азбучных истинах караульной службе и о злоумышленниках в овечьих шкурах.</p>
+                        <p>Выбор проектов для отчёта сравнения.
+                            Кнопка «Рекомендуем по рейтингу» – это авто подбор ТОП-3 по сценарию фильтра. Можно принять рекомендацию, или удалить ненужные проекты.</p>
+                        <p>
+                            Поиск по названию  и Поиск по карте – это ручной выбор проектов. На карте выбранные объекты выделяются цветом.</p>
                     </div>
                 </div>
-                <div class="projects__inner projects__inner--column">
-                    <label for="raiting-checkbox" class="btn-checkbox projects__checkbox">
-                        <input type="checkbox" class="btn-checkbox__input" id="raiting-checkbox">
-                        <span class="btn-checkbox__label" id="by_raiting_button">Рекомендуем по рейтингу</span>
-                        <span class="btn-checkbox__icon"></span>
-                    </label>
-                    <div class="input-group projects__input-group" id="available_projects" style="margin-left:20px; margin-right:20px;min-width:334px;">
+                <div class="projects__inner">
+                    <div class="projects__list">
+                        <label for="raiting-checkbox" class="btn-checkbox projects__checkbox">
+                            <input type="checkbox" class="btn-checkbox__input" id="raiting-checkbox">
+                            <span class="btn-checkbox__label" id="by_raiting_button">Рекомендуем по рейтингу</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                    </div>
+                    <div class="input-group projects__input-group" id="available_projects">
                         <input type="text" class="input-group__input" placeholder="Выбрать не более 3 вариантов" style="max-width:100%;">
                         <ul class="input-dropdown" id="available_projects_list">
 
                         </ul>
                     </div>
-                    <label for="show-map-checkbox" class="btn-checkbox projects__checkbox">
-                        <input type="checkbox" class="btn-checkbox__input" id="show-map-checkbox">
-                        <span class="btn-checkbox__label" id="useMap_button">Посмотреть на карте</span>
-                        <span class="btn-checkbox__icon"></span>
-                    </label>
+                    <div class="projects__list">
+                        <label for="useMap_button" class="btn-checkbox projects__checkbox" >
+                            <input type="checkbox" class="btn-checkbox__input" id="useMap_button">
+                            <span class="btn-checkbox__label"  >Посмотреть на карте</span>
+                            <span class="btn-checkbox__icon"></span>
+                        </label>
+                    </div>
+                    <div class="projects__inner projects__inner--column">
 
-                    <input type="hidden" name="compare_objects_type" value="" />
+                        <input type="hidden" name="compare_objects_type" value="" />
+                    </div>
                 </div>
+
                 <!--Выбранные жк -->
                 <div class="projects__list" id="selected_jk">
 
@@ -564,6 +575,17 @@
         </div>
     </section>
     <!-- End of projects -->
+    <!-- Modal Find Houses -->
+    <div class="modal modal-count modal--active modal-count__hide" id="modal_count">
+        <div class="modal__content">
+            <div class="modal__content--text">
+                <div class="projects__text">
+                    Подходит проектов: <span id="total_panel"></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <!-- Footer -->
     <footer class="footer" id="footer">
         <div class="container">
@@ -822,6 +844,19 @@
     </div>
     <!--End of Modal payment failure -->
 
+    <!--Modal cookie-->
+    <div class="modal modal-cookie" id="modal_cookie">
+        <div class="modal__content">
+            <div class="modal__content--text">
+                Мы <a href="#">используем куки</a></a>
+            </div>
+            <div class="modal__content--button" id="modal_cookie-close">
+                Ok
+            </div>
+        </div>
+    </div>
+    <!--END of modal cookie -->
+
     <div class="overlay"></div>
     <!-- End of modal -->
     <!-- Scripts -->
@@ -829,82 +864,153 @@
 
     <script src="https://api-maps.yandex.ru/2.1/?apikey=6bbdf00b-d01b-420e-8ea2-2ca9c741ee6c&lang=ru_RU" type="text/javascript"></script>
     <script type="text/javascript">
-        var myMap;
-        var objectManager;
-        ymaps.ready(function () {
-             myMap = new ymaps.Map('YMapsID', {
-                 center: [55.751574, 37.573856],
-                 controls: ['zoomControl','typeSelector', 'fullscreenControl', 'routeButtonControl'],
-                 zoom: 9
-            });
+        let yandex_map = document.getElementById('YMapsID');
 
-            objectManager = new ymaps.ObjectManager({
-                // Чтобы метки начали кластеризоваться, выставляем опцию.
-                clusterize: true,
-                // ObjectManager принимает те же опции, что и кластеризатор.
-                gridSize: 24,
-                clusterDisableClickZoom: false
-            });
-            //objectManager.objects.options.set('preset', 'islands#greenDotIcon');
-            objectManager.objects.options.set({
-                iconLayout: 'default#image',
-                iconImageHref: '/img/dist/icon-mark.svg',
-                iconImageSize: [28, 42],
-                iconImageOffset: [-20, -40]
-            });
-
-            objectManager.clusters.options.set('preset', 'islands#yellowClusterIcons');
-            myMap.geoObjects.add(objectManager);
+        if(yandex_map) {
 
 
-            myMap.events.add('click', function (e) {
-                // Получение координат щелчка
-                //var coords = e.get('coords');
-                //alert(coords.join(', '));
-            });
-            myMap.events.add('dblclick', function (e) {
-                //e.preventDefault(); // При двойном щелчке зума не будет.
-            });
-        });
+            var addJkSelect = function (name, code) {
+                let current_element = document.querySelector('[data-id="jk_' + code + '"]');
+                let already_selected_jks = document.querySelectorAll('#calc > input[name="jks[]"]');
+                if (already_selected_jks) {
+                    if (already_selected_jks.length === 3) {
+                        alert('Максимально только 3 ЖК');
+                        return true;
+                    }
+                }
+                if (!current_element) {
+                    objectManager.objects.setObjectOptions(code, {iconImageHref: '/img/dist/icon-mark_selected.svg'});
+                    let jk = '<label for="apartment-checkbox-01" class="btn-checkbox projects__checkbox" data-id="' + code + '" data-name="' + name + '">\n' +
+                        '                        <input type="checkbox" class="btn-checkbox__input" id="apartment-checkbox-01"  checked>\n' +
+                        '                        <span class="btn-checkbox__label" data-id="jk_' + code + '">' + name + '</span>\n' +
+                        '                        <span class="btn-checkbox__icon" data-id="jk_' + code + '"></span>\n' +
+                        '                    </label>';
+
+                    selected_jk.insertAdjacentHTML('beforeend', jk);
+                    calc.insertAdjacentHTML('beforeend', '<input type="hidden" name="jks[]" value="' + code + '" data-id="jk_' + code + '"/>')
+                } else {
+                    console.log('уже есть');
+                }
 
 
-        const useMapButton = document.getElementById('useMap_button');
-        const mapWrapper = document.getElementById('YMapsID');
+            }
 
-        useMapButton.addEventListener('click',() => {
-
-            let gCollection = new ymaps.GeoObjectCollection(null, {
-                preset: 'islands#blueIcon'
-            });
-            console.log(mapWrapper.classList.contains('projects__map--active'));
-
-            if(mapWrapper.classList.contains('projects__map--active')) {
-                myMap.geoObjects.each(function (geoObject) {
-                    //geoObject.remove();
-                    //myMap.geoObjects.remove(geoObject);
+            var myMap;
+            var objectManager;
+            ymaps.ready(function () {
+                myMap = new ymaps.Map('YMapsID', {
+                    center: [55.751574, 37.573856],
+                    controls: ['zoomControl', 'typeSelector', 'fullscreenControl', 'routeButtonControl'],
+                    zoom: 9
                 });
 
-                mapWrapper.classList.remove('projects__map--active');
-                myMap.container.fitToViewport();
-            }
-            else {
 
-                mapWrapper.classList.add('projects__map--active');
-                myMap.container.fitToViewport();
+                IliBalloonContentLayout = ymaps.templateLayoutFactory.createClass(
+                    '<div class="map_item_wrapper" id="balloon_wrapper" data-id="$[properties.id]" data-name="$[properties.name]">' +
+                    '    <div class="name">$[properties.name]</div>' +
+                    '    <div class="developer">$[properties.developer]</div>' +
+                    '    <div class="date">$[properties.date]</div>' +
+                    '    <div class="type">$[properties.type] <span>$[properties.type_class]</span></div>' +
+                    '    <div class="rooms">$[properties.rooms]</div>' +
+                    '</dvi>',
+                    {
+
+                        build: function () {
+
+                            // var element = this.getParentElement().getElementsByClassName('map_item_wrapper');
+                            var element = this.getParentElement().getElementsByClassName('map_item_wrapper');
+                            // Сначала вызываем метод build родительского класса.
+                            IliBalloonContentLayout.superclass.build.call(this);
+                            // А затем выполняем дополнительные действия.
+                            ///console.log(objectManager.objects.balloon.events.add);
+                            objectManager.objects.balloon.events.add('click', event => {
+                                event.stopPropagation();
+                                if (element.length > 0) {
+                                    window.addJkSelect(element[0].dataset.name, element[0].dataset.id)
+                                }
+
+                            });
+                        },
+                        clear: function () {
+                            // Выполняем действия в обратном порядке - сначала снимаем слушателя,
+                            // а потом вызываем метод clear родительского класса.
+                            objectManager.objects.balloon.events.remove('click', event => {
+                            });
+                            console.log(objectManager.objects.balloon.events);
+                            IliBalloonContentLayout.superclass.clear.call(this);
+                        }
 
 
-            }
+                    });
 
-        } )
+                objectManager = new ymaps.ObjectManager({
+                    // Чтобы метки начали кластеризоваться, выставляем опцию.
+                    clusterize: true,
+                    // ObjectManager принимает те же опции, что и кластеризатор.
+                    gridSize: 24,
+                    clusterDisableClickZoom: false,
+                    // clusterOpenBalloonOnClick: true,
+                    // clusterBalloonPanelMaxMapArea: 0,
+                    clusterBalloonMaxHeight: 200,
+                });
 
 
+                objectManager.objects.options.set({
+                    iconLayout: 'default#image',
+                    iconImageHref: '/img/dist/icon-mark.svg',
+                    iconImageSize: [28, 42],
+                    iconImageOffset: [-20, -40],
+                    balloonContentLayout: IliBalloonContentLayout,
+                    balloonPanelMaxMapArea: 1
+                });
+
+                objectManager.clusters.options.set('preset', 'islands#yellowClusterIcons');
+                myMap.geoObjects.add(objectManager);
+
+                myMap.events.add('click', function (e) {
+                    // Получение координат щелчка
+                    //var coords = e.get('coords');
+                    //alert(coords.join(', '));
+                });
+                myMap.events.add('dblclick', function (e) {
+                    //e.preventDefault(); // При двойном щелчке зума не будет.
+                });
+            });
 
 
+            const useMapButton = document.getElementById('useMap_button');
+            const mapWrapper = document.getElementById('YMapsID');
 
+            useMapButton.addEventListener('change', () => {
+
+                let gCollection = new ymaps.GeoObjectCollection(null, {
+                    preset: 'islands#blueIcon'
+                });
+                console.log(mapWrapper.classList.contains('projects__map--active'));
+
+                if (mapWrapper.classList.contains('projects__map--active')) {
+                    myMap.geoObjects.each(function (geoObject) {
+                        //geoObject.remove();
+                        //myMap.geoObjects.remove(geoObject);
+                    });
+
+                    mapWrapper.classList.remove('projects__map--active');
+                    myMap.container.fitToViewport();
+                } else {
+
+                    mapWrapper.classList.add('projects__map--active');
+                    myMap.container.fitToViewport();
+
+
+                }
+
+            })
+        }
 
 
     </script>
     <script src="js/app.min.js"></script>
+
 
 </body>
 </html>
