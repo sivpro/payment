@@ -36,6 +36,13 @@
         transform: translate(-50%, -50%) scale(1);
     }
 
+    &--error-count {
+        max-height: 390px;
+        width: 608px;
+
+    }
+
+
     @media screen and (max-width: 1023px) {
         width: 90%;
     }
@@ -44,6 +51,10 @@
         width: 100%;
         height: 100%;
         border-radius: 0;
+
+        &--error-count {
+            height: auto;
+        }
     }
 
     &__close {
@@ -126,6 +137,9 @@
     &__bottom {
         margin-top: 60px;
         text-align: center;
+        &--error-count {
+            margin-top: 20px;
+        }
 
         @media screen and (max-width: 767px) {
             margin-top: 40px;
@@ -181,6 +195,13 @@
     left: calc(100% - 300px);
     transition: none;
     transform: none;
+    display:none;
+
+    &--active {
+        visibility: visible;
+        display:block;
+
+    }
 
     @media screen and (max-width: 767px) {
         /*
@@ -252,6 +273,12 @@
     overflow-y: hidden;
     transform: translateZ(0);
     z-index: 1011;
+
+    &--active {
+        visibility: visible;
+        //display:block;
+
+    }
 }
 .modal-count .modal__content {
     padding-top: 25px;

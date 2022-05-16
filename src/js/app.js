@@ -681,20 +681,35 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-
+    //Кнопка автоматического выбора ЖК
     let by_raiting_ckeckbox = document.getElementById('raiting-checkbox');
 
     if(by_raiting_ckeckbox){
         by_raiting_ckeckbox.addEventListener('change',function(event) {
            if(event.target.checked === false){
-               document.querySelectorAll('#calc > input[name="jks[]"]').forEach((item)=>{item.remove()});
+               document.querySelectorAll('#calc > input[name="jks[]"]').forEach((item)=>{
+                   item.remove();
+                   //console.log(item.value);
+                   console.log(item.dataset.id);
+                   objectManager.objects.setObjectOptions(item.dataset.id.replace('jk_', ''), {iconImageHref: '/img/dist/icon-mark.svg'});
+               });
                selected_jk.innerHTML='';
+               //Отключить выбор на карте;
+               //objectManager.objects.setObjectOptions(event.target.dataset.id.replace('jk_', ''), {iconImageHref: '/img/dist/icon-mark.svg'});
+               //objectManager.objects.options.set('preset',{iconImageHref: '/img/dist/icon-mark.svg'})
+
            }
            else {
                let items_by_rating = document.querySelectorAll('#available_projects_list > li:nth-child(-n+3)');
                //Удаляем уже выбранные
                selected_jk.innerHTML='';
-               document.querySelectorAll('#calc > input[name="jks[]"]').forEach((item)=>{item.remove()});
+
+               document.querySelectorAll('#calc > input[name="jks[]"]').forEach((item)=>{
+                   item.remove();
+                   //console.log(item.value);
+                   console.log(item.dataset.id);
+                   objectManager.objects.setObjectOptions(item.dataset.id.replace('jk_', ''), {iconImageHref: '/img/dist/icon-mark.svg'});
+               });
 
                console.log('по рейтингу');
                console.log(items_by_rating);
@@ -920,7 +935,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 if(item.id==='get_projects_button'){
                     let jks = document.getElementsByName('jks[]');
                     if(jks.length <= 0) {
-                        alert('Чтобы сравнить - выберите от 1 до 3 проектов.');
+                        //alert('Чтобы сравнить - выберите от 1 до 3 проектов.');
+                        document.getElementById('need-failure-text').innerHTML='Чтобы сравнить<br />выберите от 1 до 3 проектов';
+                        document.getElementById('need-failure').classList.add('modal--active');
+                        if (!overlay.classList.contains('overlay--active')) {
+                            overlay.classList.add('overlay--active');
+                        }
                         return false;
                     }
                 }
@@ -1050,12 +1070,12 @@ document.addEventListener('DOMContentLoaded', function () {
     let cookie_modal = document.getElementById('modal_cookie');
     let cookie_modal_close = document.getElementById('modal_cookie-close');
     if(!sessionStorage.getItem('cookie_info_seen')) {
-        cookie_modal.classList.add('modal--active');
+        cookie_modal.classList.add('modal-cookie--active');
     }
     cookie_modal_close.addEventListener('click',function(event) {
         event.preventDefault();
         sessionStorage.setItem('cookie_info_seen',1);
-        cookie_modal.classList.remove('modal--active');
+        cookie_modal.classList.remove('modal-cookie--active');
     })
 
 
