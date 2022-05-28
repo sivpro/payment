@@ -219,6 +219,9 @@ svg {
             padding: 10.5px 20px;
         }
     }
+    &__orange {
+        background: $yellow-color;
+    }
     &__icon {
         display:none;
     }
